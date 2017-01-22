@@ -21,6 +21,8 @@
   "homepage": "https://github.com/arunoda/coursebook-ui#readme",
   "dependencies": {
     "express": "^4.14.0",
+    "lokka": "^1.7.0",
+    "lokka-transport-http": "^1.6.1",
     "next": "^2.0.0-beta"
   },
   "engines": {
