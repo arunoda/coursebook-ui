@@ -1,15 +1,18 @@
 import React from 'react'
-import { withCache, setCache } from '../../lib/lokka'
+import StepNav from './StepNav'
+import { withCache, setCache } from '../../../lib/lokka'
+import { GetStore } from '../../../lib/store'
 
-class Lesson extends React.Component {
-  render() {
+let Lesson = class extends React.Component {
+  render () {
     const { course } = this.props
     const lesson = course.lessons[0]
     setCache(`lesson-${course.id}-${lesson.id}`, { course }, Lesson.cacheOptions)
-    
+
     return (
       <div>
         <h2>{lesson.name}</h2>
+        {lesson.steps ? <StepNav steps={lesson.steps} /> : null}
         <p>
           {lesson.intro}
         </p>
@@ -18,8 +21,16 @@ class Lesson extends React.Component {
   }
 }
 
+Lesson = GetStore()(Lesson)
+
 Lesson.cacheOptions = { client: 1000 * 60 * 5 }
-Lesson.fetch = async (c, courseId, lessonId) => {
+Lesson.fetch = async (state, c, courseId, lessonId) => {
+  const steps = `
+    steps {
+      ...${StepNav.fragment(c)}
+    }
+  `
+
   const query = `
     {
       course(id: "${courseId}") {
@@ -28,6 +39,7 @@ Lesson.fetch = async (c, courseId, lessonId) => {
           id
           name
           intro
+          ${state.loginToken ? steps : ''}
         }
       }
     }

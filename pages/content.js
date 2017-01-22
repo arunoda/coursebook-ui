@@ -1,7 +1,8 @@
 import Header from '../components/Header'
 import Navigation from '../components/Content/Navigation'
 import Lesson from '../components/Content/Lesson'
-import getLokkaClient, { query } from '../lib/lokka'
+import getLokkaClient from '../lib/lokka'
+import { getInitialState, WithStore } from '../lib/store'
 
 const styles = {
   navigation: {
@@ -16,26 +17,31 @@ const styles = {
   }
 }
 
-const Content = (props) => (
+let Content = (props) => (
   <div>
     <Header />
     <div>
       <div style={styles.navigation}>
-        <Navigation {...props.navigationData}/>
+        <Navigation {...props.navigationData} />
       </div>
       <div style={styles.lesson}>
-        <Lesson {...props.lessonData}/>
+        <Lesson {...props.lessonData} />
       </div>
     </div>
   </div>
 )
 
-Content.getInitialProps = async ({ query }) => {
-  const client = getLokkaClient()
-  const navigationData = await Navigation.fetch(client)
-  const lessonData = await Lesson.fetch(client, query.course, query.lesson)
+Content = WithStore()(Content)
 
-  return { navigationData, lessonData }
+Content.getInitialProps = async (context) => {
+  const initialState = getInitialState(context)
+  const { query } = context
+
+  const client = getLokkaClient(initialState)
+  const navigationData = await Navigation.fetch(client)
+  const lessonData = await Lesson.fetch(initialState, client, query.course, query.lesson)
+
+  return { initialState, navigationData, lessonData }
 }
 
 export default Content
