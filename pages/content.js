@@ -13,8 +13,8 @@ const Content = (props) => (
 
 Content.getInitialProps = async () => {
   const client = getLokkaClient()
-  const navigationData = await query(client, Navigation.query(client))
-
+  const navigationData = await Navigation.fetch(client)
+  
   return { navigationData }
 }
 
