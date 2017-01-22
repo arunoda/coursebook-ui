@@ -6,7 +6,10 @@ class Navigation extends React.Component {
   renderLesson(course, lesson, index) {
     return (
       <div key={lesson.id}>
-        <Link href={`/${course.id}/${lesson.id}`}>
+        <Link
+          href={`/content?course=${course.id}&lesson=${lesson.id}`}
+          as={`/${course.id}/${lesson.id}`}
+        >
           <a>{index+1}. {lesson.name}</a>
         </Link>
       </div>

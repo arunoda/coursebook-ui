@@ -10,6 +10,15 @@ const handler = app.getRequestHandler()
 
 app.prepare()
   .then(() => {
+    server.get('/:course/:lesson', (req, res) => {
+      const { course, lesson } = req.params
+      if (course === '_webpack' || course === '_next') {
+        return handler(req, res)
+      }
+      
+      app.render(req, res, '/content', { course, lesson })
+    })
+
     server.use(handler)
     server.listen(port)
   })
