@@ -4,6 +4,15 @@ import { withCache, setCache } from '../../../lib/lokka'
 import { GetStore } from '../../../lib/store'
 
 let Lesson = class extends React.Component {
+  renderContent (lesson) {
+    const { step } = this.props
+    if (!step) {
+      return lesson.intro
+    }
+
+    return lesson.steps.find((s) => s.id === step).text
+  }
+
   render () {
     const { course } = this.props
     const lesson = course.lessons[0]
@@ -12,9 +21,9 @@ let Lesson = class extends React.Component {
     return (
       <div>
         <h2>{lesson.name}</h2>
-        {lesson.steps ? <StepNav steps={lesson.steps} /> : null}
+        {lesson.steps ? <StepNav steps={lesson.steps} courseId={course.id} lessonId={lesson.id} /> : null}
         <p>
-          {lesson.intro}
+          {this.renderContent(lesson)}
         </p>
       </div>
     )
@@ -28,6 +37,7 @@ Lesson.fetch = async (state, c, courseId, lessonId) => {
   const steps = `
     steps {
       ...${StepNav.fragment(c)}
+      text
     }
   `
 

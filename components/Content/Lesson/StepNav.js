@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 
 const styles = {
   step: {
@@ -12,15 +13,31 @@ const styles = {
 
 class StepNav extends React.Component {
   renderStep (step, index) {
+    const { courseId, lessonId } = this.props
     return (
-      <div style={styles.step} key={index}>{step.points}</div>
+      <div style={styles.step} key={index}>
+        <Link
+          href={`/content?course=${courseId}&lesson=${lessonId}&step=${step.id}`}
+          as={`/${courseId}/${lessonId}/${step.id}`}
+        >
+          <a>{step.points}</a>
+        </Link>
+      </div>
     )
   }
 
   render () {
-    const { steps } = this.props
+    const { steps, courseId, lessonId } = this.props
     return (
       <div>
+        <div style={styles.step}>
+          <Link
+            href={`/content?course=${courseId}&lesson=${lessonId}`}
+            as={`/${courseId}/${lessonId}`}
+          >
+            <a>Introduction</a>
+          </Link>
+        </div>
         {steps.map((s, i) => this.renderStep(s, i))}
       </div>
     )
@@ -28,7 +45,9 @@ class StepNav extends React.Component {
 }
 
 StepNav.propTypes = {
-  steps: React.PropTypes.array
+  steps: React.PropTypes.array,
+  courseId: React.PropTypes.string,
+  lessonId: React.PropTypes.string
 }
 
 StepNav.fragment = (c) => c.createFragment(`

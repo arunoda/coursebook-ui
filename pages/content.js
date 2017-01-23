@@ -25,7 +25,7 @@ let Content = (props) => (
         <Navigation {...props.navigationData} />
       </div>
       <div style={styles.lesson}>
-        <Lesson {...props.lessonData} />
+        <Lesson {...props.lessonData} step={props.query.step} />
       </div>
     </div>
   </div>
@@ -41,7 +41,7 @@ Content.getInitialProps = async (context) => {
   const navigationData = await Navigation.fetch(client)
   const lessonData = await Lesson.fetch(initialState, client, query.course, query.lesson)
 
-  return { initialState, navigationData, lessonData }
+  return { initialState, navigationData, lessonData, query }
 }
 
 export default Content

@@ -32,13 +32,13 @@ app.prepare()
       return res.redirect('/')
     })
 
-    server.get('/:course/:lesson', (req, res) => {
-      const { course, lesson } = req.params
+    server.get('/:course/:lesson/:step?', (req, res) => {
+      const { course, lesson, step } = req.params
       if (course === '_webpack' || course === '_next') {
         return handler(req, res)
       }
 
-      app.render(req, res, '/content', { course, lesson })
+      app.render(req, res, '/content', { course, lesson, step })
     })
 
     server.use(handler)
