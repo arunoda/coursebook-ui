@@ -1,6 +1,5 @@
 import React from 'react'
 import Link from 'next/link'
-import WithData from '../../lib/with-data'
 
 class Navigation extends React.Component {
   renderLesson (course, lesson, index) {
@@ -38,26 +37,18 @@ class Navigation extends React.Component {
 }
 
 Navigation.propTypes = {
-  courses: React.PropTypes.array
+  courses: React.PropTypes.array.isRequired
 }
 
-export default WithData({
-  propsToWatch: [],
-  dataProps: ['courses'],
-  cacheOptions: { client: 1000 * 60 * 5 },
-  fetch ({ lokkaClient }, props) {
-    const query = `
-      {
-        courses {
-          id
-          name
-          lessons {
-            id
-            name
-          }
-        }
-      }
-    `
-    return lokkaClient.query(query)
+Navigation.courseFragment = (c) => c.createFragment(`
+  fragment on Course {
+    id
+    name
+    lessons {
+      id
+      name
+    }
   }
-})(Navigation)
+`)
+
+export default Navigation

@@ -1,6 +1,6 @@
 import Header from '../components/Header'
-import Navigation from '../components/Content/Navigation'
-import Lesson from '../components/Content/Lesson'
+import Navigation from '../containers/Content/Navigation'
+import Lesson from '../containers/Content/Lesson'
 import getLokkaClient from '../lib/lokka'
 import { getInitialState, WithStore } from '../lib/store'
 

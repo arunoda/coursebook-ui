@@ -13,7 +13,7 @@ let Lesson = class extends React.Component {
   }
 
   render () {
-    const { course } = this.props
+    const { course, courseId, lessonId } = this.props
     const lesson = course.lessons[0]
 
     return (
@@ -28,32 +28,32 @@ let Lesson = class extends React.Component {
   }
 }
 
-export default WithData({
-  propsToWatch: ['courseId', 'lessonId'],
-  dataProps: ['course'],
-  cacheOptions: { client: 1000 * 60 * 5 },
-  fetch ({ lokkaClient }, { initialState, courseId, lessonId }) {
-    const steps = `
-      steps {
-        ...${StepNav.fragment(lokkaClient)}
-        text
-      }
-    `
+Lesson.propTypes = {
+  courseId: React.PropTypes.string.isRequired,
+  lessonId: React.PropTypes.string.isRequired,
+  stepId: React.PropTypes.string,
+  course: React.PropTypes.object.isRequired
+}
 
-    const query = `
-      {
-        course(id: "${courseId}") {
-          id
-          lessons(ids: ["${lessonId}"]) {
-            id
-            name
-            intro
-            ${initialState.loginToken ? steps : ''}
-          }
-        }
-      }
-    `
+Lesson.courseFragment = (c, props) => {
+  const steps = `
+    steps {
+      ...${StepNav.fragment(c)}
+      text
+    }
+  `
 
-    return lokkaClient.query(query)
-  }
-})(Lesson)
+  return c.createFragment(`
+    fragment on Course {
+      id
+      lessons(ids: ["${props.lessonId}"]) {
+        id
+        name
+        intro
+        ${props.initialState.loginToken ? steps : ''}
+      }
+    }
+  `)
+}
+
+export default Lesson
