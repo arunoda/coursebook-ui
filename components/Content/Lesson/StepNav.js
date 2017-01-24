@@ -14,6 +14,15 @@ const styles = {
 class StepNav extends React.Component {
   renderStep (step, index) {
     const { courseId, lessonId } = this.props
+
+    if (!step.visited) {
+      return (
+        <div style={styles.step} key={index}>
+          {step.points}
+        </div>
+      )
+    }
+
     return (
       <div style={styles.step} key={index}>
         <Link
@@ -53,7 +62,8 @@ StepNav.propTypes = {
 StepNav.fragment = (c) => c.createFragment(`
   fragment on Step {
     id,
-    points
+    points,
+    visited
   }
 `)
 

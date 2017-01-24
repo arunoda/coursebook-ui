@@ -25,7 +25,7 @@ let Content = (props) => (
         <Navigation {...props} />
       </div>
       <div style={styles.lesson}>
-        <Lesson {...props}/>
+        <Lesson {...props} />
       </div>
     </div>
   </div>

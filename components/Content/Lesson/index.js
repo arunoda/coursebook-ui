@@ -1,6 +1,5 @@
 import React from 'react'
 import StepNav from './StepNav'
-import WithData from '../../../lib/with-data'
 
 let Lesson = class extends React.Component {
   renderContent (lesson) {
@@ -9,7 +8,12 @@ let Lesson = class extends React.Component {
       return lesson.intro
     }
 
-    return lesson.steps.find((s) => s.id === stepId).text
+    const step = lesson.steps.find((s) => s.id === stepId)
+    if (step.visited) {
+      return step.text
+    }
+
+    return 'Not Visited Yet!'
   }
 
   render () {
@@ -19,7 +23,7 @@ let Lesson = class extends React.Component {
     return (
       <div>
         <h2>{lesson.name}</h2>
-        {lesson.steps ? <StepNav steps={lesson.steps} courseId={course.id} lessonId={lesson.id} /> : null}
+        {lesson.steps ? <StepNav steps={lesson.steps} courseId={courseId} lessonId={lessonId} /> : null}
         <p>
           {this.renderContent(lesson)}
         </p>
@@ -40,6 +44,7 @@ Lesson.courseFragment = (c, props) => {
     steps {
       ...${StepNav.fragment(c)}
       text
+      visited
     }
   `
 

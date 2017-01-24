@@ -2,7 +2,7 @@ import Lesson from '../../components/Content/Lesson'
 import WithData from '../../lib/with-data'
 
 export default WithData({
-  propsToWatch: ['courseId', 'lessonId', 'stepId'],
+  propsToWatch: ['courseId', 'lessonId'],
   dataProps: ['course'],
   cacheOptions: { client: 1000 * 60 * 5 },
   fetch ({ lokkaClient }, props) {
