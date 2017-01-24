@@ -1,22 +1,20 @@
 import React from 'react'
 import StepNav from './StepNav'
-import { withCache, setCache } from '../../../lib/lokka'
-import { GetStore } from '../../../lib/store'
+import WithData from '../../../lib/with-data'
 
 let Lesson = class extends React.Component {
   renderContent (lesson) {
-    const { step } = this.props
-    if (!step) {
+    const { stepId } = this.props
+    if (!stepId) {
       return lesson.intro
     }
 
-    return lesson.steps.find((s) => s.id === step).text
+    return lesson.steps.find((s) => s.id === stepId).text
   }
 
   render () {
     const { course } = this.props
     const lesson = course.lessons[0]
-    setCache(`lesson-${course.id}-${lesson.id}`, { course }, Lesson.cacheOptions)
 
     return (
       <div>
@@ -30,36 +28,32 @@ let Lesson = class extends React.Component {
   }
 }
 
-Lesson = GetStore()(Lesson)
+export default WithData({
+  propsToWatch: ['courseId', 'lessonId'],
+  dataProps: ['course'],
+  cacheOptions: { client: 1000 * 60 * 5 },
+  fetch ({ lokkaClient }, { initialState, courseId, lessonId }) {
+    const steps = `
+      steps {
+        ...${StepNav.fragment(lokkaClient)}
+        text
+      }
+    `
 
-Lesson.cacheOptions = { client: 1000 * 60 * 5 }
-Lesson.fetch = async (state, c, courseId, lessonId) => {
-  const steps = `
-    steps {
-      ...${StepNav.fragment(c)}
-      text
-    }
-  `
-
-  const query = `
-    {
-      course(id: "${courseId}") {
-        id
-        lessons(ids: ["${lessonId}"]) {
+    const query = `
+      {
+        course(id: "${courseId}") {
           id
-          name
-          intro
-          ${state.loginToken ? steps : ''}
+          lessons(ids: ["${lessonId}"]) {
+            id
+            name
+            intro
+            ${initialState.loginToken ? steps : ''}
+          }
         }
       }
-    }
-  `
+    `
 
-  const data = await withCache(`lesson-${courseId}-${lessonId}`, async () => {
-    return c.query(query)
-  }, Lesson.cacheOptions)
-
-  return data
-}
-
-export default Lesson
+    return lokkaClient.query(query)
+  }
+})(Lesson)

@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import { withCache, setCache } from '../../lib/lokka'
+import WithData from '../../lib/with-data'
 
 class Navigation extends React.Component {
   renderLesson (course, lesson, index) {
@@ -29,9 +29,6 @@ class Navigation extends React.Component {
 
   render () {
     const { courses } = this.props
-    // TODO: Move this logic into a container
-    setCache('courses-for-nav', { courses }, Navigation.cacheOptions)
-
     return (
       <div>
         {courses.map((c, i) => this.renderCourse(c, i))}
@@ -44,24 +41,23 @@ Navigation.propTypes = {
   courses: React.PropTypes.array
 }
 
-Navigation.cacheOptions = { client: 1000 * 60 * 5 }
-
-// TODO: Move this logic into a container
-Navigation.fetch = async (c) => {
-  const query = `
-    {
-      courses {
-        id
-        name
-        lessons {
+export default WithData({
+  propsToWatch: [],
+  dataProps: ['courses'],
+  cacheOptions: { client: 1000 * 60 * 5 },
+  fetch ({ lokkaClient }, props) {
+    const query = `
+      {
+        courses {
           id
           name
+          lessons {
+            id
+            name
+          }
         }
       }
-    }
-  `
-  const getData = () => c.query(query)
-  return await withCache('courses-for-nav', getData, Navigation.cacheOptions)
-}
-
-export default Navigation
+    `
+    return lokkaClient.query(query)
+  }
+})(Navigation)
