@@ -22,14 +22,10 @@ let Content = (props) => (
     <Header />
     <div>
       <div style={styles.navigation}>
-        <Navigation {...props.navigationData} />
+        <Navigation {...props} />
       </div>
       <div style={styles.lesson}>
-        <Lesson {...props.lessonData}
-          stepId={props.stepId}
-          courseId={props.courseId}
-          lessonId={props.lessonId}
-        />
+        <Lesson {...props}/>
       </div>
     </div>
   </div>
@@ -39,21 +35,22 @@ Content = WithStore()(Content)
 
 Content.getInitialProps = async (context) => {
   const { query } = context
+  const initialState = getInitialState(context)
+  const env = {
+    lokkaClient: getLokkaClient(initialState)
+  }
+
   const props = {
     courseId: query.course,
     lessonId: query.lesson,
     stepId: query.step,
-    initialState: getInitialState(context)
+    initialState
   }
 
-  const env = {
-    lokkaClient: getLokkaClient(props.initialState)
-  }
+  Object.assign(props, await Navigation.fetch(env, props))
+  Object.assign(props, await Lesson.fetch(env, props))
 
-  const navigationData = await Navigation.fetch(env, {})
-  const lessonData = await Lesson.fetch(env, props)
-
-  return { ...props, navigationData, lessonData }
+  return props
 }
 
 export default Content
