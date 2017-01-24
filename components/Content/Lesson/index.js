@@ -1,5 +1,5 @@
 import React from 'react'
-import StepNav from './StepNav'
+import StepBar from './StepBar'
 
 let Lesson = class extends React.Component {
   renderContent (lesson) {
@@ -23,7 +23,7 @@ let Lesson = class extends React.Component {
     return (
       <div>
         <h2>{lesson.name}</h2>
-        {lesson.steps ? <StepNav steps={lesson.steps} courseId={courseId} lessonId={lessonId} /> : null}
+        {lesson.steps ? <StepBar steps={lesson.steps} courseId={courseId} lessonId={lessonId} /> : null}
         <p>
           {this.renderContent(lesson)}
         </p>
@@ -42,7 +42,7 @@ Lesson.propTypes = {
 Lesson.courseFragment = (c, props) => {
   const steps = `
     steps {
-      ...${StepNav.fragment(c)}
+      ...${StepBar.fragment(c)}
       text
       visited
     }
