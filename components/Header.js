@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import { GetStore } from '../lib/store'
+import { GetEnv } from '../lib/env'
 
 const A = (props) => (
   <Link href={props.href} as={props.as}>
@@ -33,6 +33,6 @@ let Header = class extends React.Component {
   }
 }
 
-Header = GetStore()(Header)
+Header = GetEnv()(Header)
 
 export default Header

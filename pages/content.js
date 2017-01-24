@@ -2,7 +2,7 @@ import Header from '../components/Header'
 import Navigation from '../containers/Content/Navigation'
 import Lesson from '../containers/Content/Lesson'
 import getLokkaClient from '../lib/lokka'
-import { getInitialState, WithStore } from '../lib/store'
+import { getInitialState, WithEnv } from '../lib/env'
 
 const styles = {
   navigation: {
@@ -31,7 +31,7 @@ let Content = (props) => (
   </div>
 )
 
-Content = WithStore()(Content)
+Content = WithEnv()(Content)
 
 Content.getInitialProps = async (context) => {
   const { query } = context

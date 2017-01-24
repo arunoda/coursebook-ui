@@ -1,5 +1,6 @@
 import React from 'react'
 import StepBar from './StepBar'
+import StepNav from './StepNav'
 
 let Lesson = class extends React.Component {
   renderContent (lesson) {
@@ -17,7 +18,7 @@ let Lesson = class extends React.Component {
   }
 
   render () {
-    const { course, courseId, lessonId } = this.props
+    const { course, courseId, lessonId, stepId } = this.props
     const lesson = course.lessons[0]
 
     return (
@@ -27,6 +28,7 @@ let Lesson = class extends React.Component {
         <p>
           {this.renderContent(lesson)}
         </p>
+        <StepNav steps={lesson.steps} courseId={courseId} lessonId={lessonId} currentStepId={stepId} />
       </div>
     )
   }

@@ -1,5 +1,5 @@
 import Header from '../components/Header'
-import { getInitialState, WithStore } from '../lib/store'
+import { getInitialState, WithEnv } from '../lib/env'
 
 let HomePage = () => (
   <div>
@@ -8,7 +8,7 @@ let HomePage = () => (
   </div>
 )
 
-HomePage = WithStore()(HomePage)
+HomePage = WithEnv()(HomePage)
 
 HomePage.getInitialProps = function (context) {
   const initialState = getInitialState(context)
