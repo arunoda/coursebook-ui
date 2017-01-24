@@ -1,5 +1,5 @@
-import Lesson from '../../components/Content/Lesson'
-import WithData from '../../lib/with-data'
+import Lesson from '../../../components/Content/Lesson'
+import WithData from '../../../lib/with-data'
 
 export default WithData({
   propsToWatch: ['courseId', 'lessonId'],
