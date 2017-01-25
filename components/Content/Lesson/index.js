@@ -19,9 +19,9 @@ let Lesson = class extends React.Component {
   }
 
   render () {
-    const { course, courseId, lessonId, stepId } = this.props
+    const { course, courseId, lessonId, stepId, allCourses } = this.props
     const lesson = course.lessons[0]
-    const step = lesson.steps? lesson.steps.find((s) => s.id === stepId) : null
+    const step = lesson.steps ? lesson.steps.find((s) => s.id === stepId) : null
 
     return (
       <div>
@@ -31,7 +31,7 @@ let Lesson = class extends React.Component {
           {this.renderContent(lesson)}
         </p>
         {(step && step.type === 'mcq') ? <AnswerBox courseId={courseId} lessonId={lessonId} step={step} /> : null }
-        <StepNav steps={lesson.steps} courseId={courseId} lessonId={lessonId} currentStepId={stepId} />
+        <StepNav steps={lesson.steps} courseId={courseId} lessonId={lessonId} currentStepId={stepId} allCourses={allCourses} />
       </div>
     )
   }
@@ -41,8 +41,15 @@ Lesson.propTypes = {
   courseId: React.PropTypes.string.isRequired,
   lessonId: React.PropTypes.string.isRequired,
   stepId: React.PropTypes.string,
-  course: React.PropTypes.object.isRequired
+  course: React.PropTypes.object.isRequired,
+  allCourses: React.PropTypes.array.isRequired
 }
+
+Lesson.allCoursesFragment = (c) => c.createFragment(`
+  fragment on Course {
+    ...${StepNav.courseFragment(c)}
+  }
+`)
 
 Lesson.courseFragment = (c, props) => {
   const steps = `

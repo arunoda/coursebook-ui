@@ -1,4 +1,5 @@
 import React from 'react'
+import Router from 'next/router'
 
 const styles = {
   item: {
@@ -34,6 +35,36 @@ class StepNav extends React.Component {
     return Boolean(nextStep)
   }
 
+  nextLesssonUrls () {
+    const { allCourses, courseId, lessonId } = this.props
+    const allLessons = []
+
+    allCourses.forEach((course) => {
+      course.lessons.forEach((lesson) => allLessons.push({
+        courseId: course.id, lessonId: lesson.id
+      }))
+    })
+
+    const currentIndex = allLessons.findIndex((l) => l.courseId === courseId && l.lessonId === lessonId)
+    const nextLesson = allLessons[currentIndex + 1]
+
+    if (!nextLesson) return null
+
+    return {
+      as: `/${nextLesson.courseId}/${nextLesson.lessonId}`,
+      href: `/content?course=${nextLesson.courseId}&lesson=${nextLesson.lessonId}`
+    }
+  }
+
+  getNextLesson () {
+    const urls = this.nextLesssonUrls()
+    if (!urls) return null
+
+    return (
+      <button onClick={() => Router.push(urls.href, urls.as)}>Next Lesson</button>
+    )
+  }
+
   render () {
     const { steps, currentStepId, loading } = this.props
 
@@ -49,10 +80,12 @@ class StepNav extends React.Component {
       return (<button style={styles.item} onClick={() => this.fireNext()}>Start Now</button>)
     }
 
+    const nextStepButton = (<button style={styles.item} onClick={() => this.fireNext()}>Next</button>)
+
     return (
       <div>
         <button style={styles.item} onClick={() => this.firePrev()}>Prev</button>
-        { this.hasNextStep() ? <button style={styles.item} onClick={() => this.fireNext()}>Next</button> : null}
+        { this.hasNextStep() ? nextStepButton : this.getNextLesson() }
       </div>
     )
   }
@@ -62,8 +95,18 @@ StepNav.propTypes = {
   steps: React.PropTypes.array,
   courseId: React.PropTypes.string.isRequired,
   lessonId: React.PropTypes.string.isRequired,
+  allCourses: React.PropTypes.array.isRequired,
   currentStepId: React.PropTypes.string
 }
+
+StepNav.courseFragment = (c) => c.createFragment(`
+  fragment on Course {
+    id
+    lessons {
+      id
+    }
+  }
+`)
 
 StepNav.fragment = (c) => c.createFragment(`
   fragment on Step {
