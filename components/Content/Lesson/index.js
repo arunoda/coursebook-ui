@@ -21,7 +21,7 @@ let Lesson = class extends React.Component {
   render () {
     const { course, courseId, lessonId, stepId } = this.props
     const lesson = course.lessons[0]
-    const step = lesson.steps.find((s) => s.id === stepId)
+    const step = lesson.steps? lesson.steps.find((s) => s.id === stepId) : null
 
     return (
       <div>
