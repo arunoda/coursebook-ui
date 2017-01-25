@@ -1,0 +1,13 @@
+* [ ] Implement proper auth stuff (Login redirects, etc)
+* [ ] Get the proper email from GitHub
+* [ ] Show the total points for the user
+* [ ] Show the leaderboard
+* [ ] Refactor container libs and stuff
+* [ ] Style it
+* [ ] Try to make the UI modular and updatable.
+* [ ] Deploy Learn GraphQL with this
+* [ ] Isolate it and allow to use this with multiple projects
+* [ ] Launch next-data
+* [ ] Launch bulletproofnext.com
+* [ ] Launch coursebook to the web
+* [ ] Add payments support
