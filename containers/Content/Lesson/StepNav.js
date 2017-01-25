@@ -4,10 +4,10 @@ import Lesson from './'
 import { WithEnv } from '../../../lib/env'
 const WithActions = (C) => () => C
 
-let StepNavContainer = WithActions((onData) => ({
-  onNext: async (props, href, as) => {
+let StepNavContainer = WithActions((props, changeProps) => ({
+  onNext: async (href, as) => {
     const { lokkaClient } = props
-    onData(null, { loading: true })
+    changeProps({ loading: true })
 
     // Do the mutation
     await lokkaClient.mutate('..')
@@ -22,11 +22,11 @@ let StepNavContainer = WithActions((onData) => ({
     })
 
     // Change the route
-    onData(null, { loading: false })
+    changeProps({ loading: false })
     Router.push(href, as)
   },
 
-  onPrev: (props, href, as) => Router.push(href, as)
+  onPrev: (href, as) => Router.push(href, as)
 }))(StepNav)
 
 StepNavContainer = WithEnv(StepNavContainer)

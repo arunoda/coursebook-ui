@@ -1,5 +1,4 @@
 import React from 'react'
-import Link from 'next/link'
 
 const styles = {
   item: {
@@ -11,7 +10,7 @@ const styles = {
 
 class StepNav extends React.Component {
   render () {
-    const { steps, courseId, lessonId, currentStepId } = this.props
+    const { steps, currentStepId } = this.props
 
     if (!steps) {
       return (<button style={styles.item}>Login & Start</button>)
