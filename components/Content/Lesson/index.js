@@ -1,6 +1,6 @@
 import React from 'react'
 import StepBar from './StepBar'
-import StepNav from './StepNav'
+import StepNav from '../../../containers/Content/Lesson/StepNav'
 
 let Lesson = class extends React.Component {
   renderContent (lesson) {
