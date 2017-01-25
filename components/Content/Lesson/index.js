@@ -1,6 +1,7 @@
 import React from 'react'
 import StepBar from './StepBar'
 import StepNav from '../../../containers/Content/Lesson/StepNav'
+import AnswerBox from '../../../containers/Content/Lesson/AnswerBox'
 
 let Lesson = class extends React.Component {
   renderContent (lesson) {
@@ -20,6 +21,7 @@ let Lesson = class extends React.Component {
   render () {
     const { course, courseId, lessonId, stepId } = this.props
     const lesson = course.lessons[0]
+    const step = lesson.steps.find((s) => s.id === stepId)
 
     return (
       <div>
@@ -28,6 +30,7 @@ let Lesson = class extends React.Component {
         <p>
           {this.renderContent(lesson)}
         </p>
+        {(step && step.type === 'mcq') ? <AnswerBox courseId={courseId} lessonId={lessonId} step={step} /> : null }
         <StepNav steps={lesson.steps} courseId={courseId} lessonId={lessonId} currentStepId={stepId} />
       </div>
     )
@@ -45,6 +48,8 @@ Lesson.courseFragment = (c, props) => {
   const steps = `
     steps {
       ...${StepBar.fragment(c)}
+      ...${AnswerBox.fragment(c)}
+      type
       text
       visited
     }

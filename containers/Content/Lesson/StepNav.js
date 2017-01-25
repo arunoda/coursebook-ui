@@ -24,10 +24,6 @@ let StepNavContainer = WithActions((props, changeProps) => ({
 
     // Update the local cache for the changes in the mutation
     Lesson.updateCache({ courseId, lessonId }, (item) => {
-      if (!item.course) {
-        console.log('WEIRD', courseId, lessonId, item)
-        return
-      }
       const step = item.course.lessons[0].steps.find((s) => s.id === nextStep.id)
       step.visited = true
 

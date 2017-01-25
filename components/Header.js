@@ -26,7 +26,7 @@ let Header = class extends React.Component {
     return (
       <div className='header'>
         <A href='/'>Home</A>
-        <A href='/content?course=simple&lesson=lesson-one' as='/simple/lesson-one'>Content</A>
+        <A href='/content?course=first-course&lesson=lesson-one' as='/first-course/lesson-one'>Content</A>
         { this.renderLoginLink() }
       </div>
     )
