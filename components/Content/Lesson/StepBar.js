@@ -27,7 +27,6 @@ class StepBar extends React.Component {
     }
 
     const itemStyle = step.id === currentStepId ? styles.bold : {}
-    console.log(itemStyle, step.id, currentStepId)
 
     return (
       <div style={styles.step} key={index}>

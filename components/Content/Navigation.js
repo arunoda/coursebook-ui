@@ -1,15 +1,24 @@
 import React from 'react'
 import Link from 'next/link'
 
+const styles = {
+  bold: {
+    fontWeight: 800
+  }
+}
+
 class Navigation extends React.Component {
   renderLesson (course, lesson, index) {
+    const { courseId, lessonId } = this.props
+    const textStyle = (course.id === courseId && lesson.id === lessonId) ? styles.bold : {}
+
     return (
       <div key={lesson.id}>
         <Link
           href={`/content?course=${course.id}&lesson=${lesson.id}`}
           as={`/${course.id}/${lesson.id}`}
         >
-          <a>{index + 1}. {lesson.name}</a>
+          <a style={textStyle}>{index + 1}. {lesson.name}</a>
         </Link>
       </div>
     )
@@ -37,7 +46,9 @@ class Navigation extends React.Component {
 }
 
 Navigation.propTypes = {
-  courses: React.PropTypes.array.isRequired
+  courses: React.PropTypes.array.isRequired,
+  courseId: React.PropTypes.string.isRequired,
+  lessonId: React.PropTypes.string.isRequired
 }
 
 Navigation.courseFragment = (c) => c.createFragment(`
