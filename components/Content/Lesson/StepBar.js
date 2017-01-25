@@ -8,12 +8,15 @@ const styles = {
     padding: 2,
     border: '1px solid #EEE',
     minWidth: 20
+  },
+  bold: {
+    fontWeight: 800
   }
 }
 
 class StepBar extends React.Component {
   renderStep (step, index) {
-    const { courseId, lessonId } = this.props
+    const { courseId, lessonId, currentStepId } = this.props
 
     if (!step.visited) {
       return (
@@ -23,20 +26,25 @@ class StepBar extends React.Component {
       )
     }
 
+    const itemStyle = step.id === currentStepId ? styles.bold : {}
+    console.log(itemStyle, step.id, currentStepId)
+
     return (
       <div style={styles.step} key={index}>
         <Link
           href={`/content?course=${courseId}&lesson=${lessonId}&step=${step.id}`}
           as={`/${courseId}/${lessonId}/${step.id}`}
         >
-          <a>{step.points}</a>
+          <a style={itemStyle}>{step.points}</a>
         </Link>
       </div>
     )
   }
 
   render () {
-    const { steps, courseId, lessonId } = this.props
+    const { steps, courseId, lessonId, currentStepId } = this.props
+
+    const introStyle = !currentStepId ? styles.bold : {}
     return (
       <div>
         <div style={styles.step}>
@@ -44,7 +52,7 @@ class StepBar extends React.Component {
             href={`/content?course=${courseId}&lesson=${lessonId}`}
             as={`/${courseId}/${lessonId}`}
           >
-            <a>Introduction</a>
+            <a style={introStyle}>Introduction</a>
           </Link>
         </div>
         {steps.map((s, i) => this.renderStep(s, i))}
@@ -56,7 +64,8 @@ class StepBar extends React.Component {
 StepBar.propTypes = {
   steps: React.PropTypes.array,
   courseId: React.PropTypes.string,
-  lessonId: React.PropTypes.string
+  lessonId: React.PropTypes.string,
+  currentStepId: React.PropTypes.string
 }
 
 StepBar.fragment = (c) => c.createFragment(`

@@ -26,7 +26,7 @@ let Lesson = class extends React.Component {
     return (
       <div>
         <h2>{lesson.name}</h2>
-        {lesson.steps ? <StepBar steps={lesson.steps} courseId={courseId} lessonId={lessonId} /> : null}
+        {lesson.steps ? <StepBar steps={lesson.steps} courseId={courseId} lessonId={lessonId} currentStepId={stepId} /> : null}
         <p>
           {this.renderContent(lesson)}
         </p>

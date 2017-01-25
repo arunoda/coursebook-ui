@@ -6,6 +6,12 @@ const styles = {
     margin: 10,
     padding: 10,
     backgroundColor: '#EFEFEF'
+  },
+  red: {
+    color: 'red'
+  },
+  green: {
+    color: 'green'
   }
 }
 
@@ -51,9 +57,30 @@ class AnswerBox extends React.Component {
   }
 
   renderStatus () {
-    return (
+    const { step } = this.props
+    const isCorrect = step.givenAnswer === step.correctAnswer
+
+    const getSymbol = (answer) => {
+      if (answer !== step.givenAnswer) return (<span>*</span>)
+      if (isCorrect) return (<span style={styles.green}>✓</span>)
+      return (<span style={styles.red}>✘</span>)
+    }
+
+    const correctAnswer = (
       <div>
-        Already answered!
+        <br />
+        <b>Correct answer is:</b> {step.correctAnswer}
+      </div>
+    )
+
+    return (
+      <div style={styles.box}>
+        {step.answers.map((answer) => (
+          <div key={answer}>
+            {getSymbol(answer)} {answer}
+          </div>
+        ))}
+        {!isCorrect ? correctAnswer : null}
       </div>
     )
   }
