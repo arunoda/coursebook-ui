@@ -34,7 +34,7 @@ let AnswerBoxContainer = WithActions((props, changeProps) => ({
     })
 
     // send the updated step to the component
-    changeProps({ loading: false, step: updatedStep })
+    changeProps({ loading: false })
   }
 }))(AnswerBox)
 
