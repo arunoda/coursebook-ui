@@ -1,8 +1,5 @@
-/* global location */
-
 import React from 'react'
 import Link from 'next/link'
-import { GetEnv } from '../lib/env'
 
 const A = (props) => (
   <Link href={props.href} as={props.as} onClick={props.onClick}>
@@ -10,31 +7,24 @@ const A = (props) => (
   </Link>
 )
 
-let Header = class extends React.Component {
+export default class Header extends React.Component {
+  fireAction (e, name, ...args) {
+    e.preventDefault()
+    const action = this.props[name]
+    if (action) {
+      action(...args)
+    }
+  }
+
   renderLoginLink () {
     const { store } = this.props
     const loginToken = store.get('loginToken')
 
     if (loginToken) {
-      const doLogout = (e) => {
-        e.preventDefault()
-        const camebackUrl = `${location.href}?logout=1`
-        // It's important to send the loginToken since that's the way
-        // how we say our auth server to logout the user
-        const href = `http://localhost:3003/logout?loginToken=${loginToken}&appRedirectUrl=${encodeURIComponent(camebackUrl)}`
-        location.href = href
-      }
-
-      return (<a href='#' onClick={doLogout}>Logout</a>)
+      return (<a href='#' onClick={(e) => this.fireAction(e, 'onLogout', loginToken)}>Logout</a>)
     }
 
-    const doLogin = (e) => {
-      e.preventDefault()
-      const href = `http://localhost:3003/login/github?needToken=1&appRedirectUrl=${encodeURIComponent(location.href)}`
-      location.href = href
-    }
-
-    return (<a href='#' onClick={doLogin}>Login</a>)
+    return (<a href='#' onClick={(e) => this.fireAction(e, 'onLogin')}>Login</a>)
   }
 
   render () {
@@ -47,7 +37,3 @@ let Header = class extends React.Component {
     )
   }
 }
-
-Header = GetEnv()(Header)
-
-export default Header

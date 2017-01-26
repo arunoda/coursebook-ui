@@ -1,5 +1,3 @@
-/* global location */
-
 import React from 'react'
 import Router from 'next/router'
 
@@ -32,9 +30,9 @@ class StepNav extends React.Component {
     if (onNext) onNext(nextStep)
   }
 
-  login () {
-    const href = `http://localhost:3003/login/github?needToken=1&appRedirectUrl=${encodeURIComponent(location.href)}`
-    location.href = href
+  fireLogin () {
+    const { onLogin } = this.props
+    if (onLogin) onLogin()
   }
 
   hasNextStep () {
@@ -80,7 +78,7 @@ class StepNav extends React.Component {
     }
 
     if (!steps) {
-      return (<button style={styles.item} onClick={() => this.login()}>Login & Start</button>)
+      return (<button style={styles.item} onClick={() => this.fireLogin()}>Login & Start</button>)
     }
 
     if (!currentStepId) {

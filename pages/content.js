@@ -1,4 +1,4 @@
-import Header from '../components/Header'
+import Header from '../containers/Header'
 import Navigation from '../containers/Content/Navigation'
 import Lesson from '../containers/Content/Lesson'
 import getLokkaClient from '../lib/lokka'
