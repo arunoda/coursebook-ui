@@ -1,4 +1,4 @@
-* [ ] Implement proper auth stuff (Login redirects, etc)
+* [x] Implement proper auth stuff (Login redirects, etc)
 * [ ] Get the proper email from GitHub
 * [ ] Show the total points for the user
 * [ ] Show the leaderboard

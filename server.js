@@ -12,6 +12,8 @@ const handler = app.getRequestHandler()
 app.prepare()
   .then(() => {
     server.use(cookieParser())
+
+    // Handling login
     server.use((req, res, next) => {
       if (!req.query.loginToken) return next()
 
@@ -20,16 +22,19 @@ app.prepare()
         httpOnly: false
       })
 
-      return res.redirect('/')
+      return res.redirect(req._parsedUrl.pathname)
     })
 
-    server.get('/logout', (req, res) => {
+    // Handling logout
+    server.use((req, res, next) => {
+      if (!req.query.logout) return next()
+
       res.cookie('loginToken', null, {
         expires: new Date(Date.now() - 1000),
         httpOnly: false
       })
 
-      return res.redirect('/')
+      return res.redirect(req._parsedUrl.pathname)
     })
 
     server.get('/:course/:lesson/:step?', (req, res) => {

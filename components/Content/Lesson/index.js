@@ -10,12 +10,14 @@ let Lesson = class extends React.Component {
       return lesson.intro
     }
 
-    const step = lesson.steps.find((s) => s.id === stepId)
-    if (step.visited) {
-      return step.text
+    if (!lesson.steps) {
+      return (<p>Unathorized Access</p>)
     }
 
-    return 'Not Visited Yet!'
+    const step = lesson.steps.find((s) => s.id === stepId)
+    if (step.visited) return step.text
+
+    return (<p>'Not Visited Yet!'</p>)
   }
 
   render () {
@@ -26,7 +28,7 @@ let Lesson = class extends React.Component {
     return (
       <div>
         <h2>{lesson.name}</h2>
-        {lesson.steps ? <StepBar steps={lesson.steps} courseId={courseId} lessonId={lessonId} currentStepId={stepId} /> : null}
+        <StepBar steps={lesson.steps || []} courseId={courseId} lessonId={lessonId} currentStepId={stepId} />
         <p>
           {this.renderContent(lesson)}
         </p>

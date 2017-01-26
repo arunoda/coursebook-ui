@@ -1,9 +1,11 @@
+/* global location */
+
 import React from 'react'
 import Link from 'next/link'
 import { GetEnv } from '../lib/env'
 
 const A = (props) => (
-  <Link href={props.href} as={props.as}>
+  <Link href={props.href} as={props.as} onClick={props.onClick}>
     <a style={{ marginRight: 10 }} {...props} />
   </Link>
 )
@@ -14,12 +16,23 @@ let Header = class extends React.Component {
     const loginToken = store.get('loginToken')
 
     if (loginToken) {
-      const href = 'http://localhost:3003/Logout?appRedirectUrl=http://localhost:4004/logout'
-      return (<A href={href}>Logout</A>)
+      const doLogout = (e) => {
+        e.preventDefault()
+        const camebackUrl = `${location.href}?logout=1`
+        const href = `http://localhost:3003/logout?appRedirectUrl=${encodeURIComponent(camebackUrl)}`
+        location.href = href
+      }
+
+      return (<a href='#' onClick={doLogout}>Logout</a>)
     }
 
-    const href = 'http://localhost:3003/login/github?needToken=1&appRedirectUrl=http://localhost:4004'
-    return (<A href={href}>Login</A>)
+    const doLogin = (e) => {
+      e.preventDefault()
+      const href = `http://localhost:3003/login/github?needToken=1&appRedirectUrl=${encodeURIComponent(location.href)}`
+      location.href = href
+    }
+
+    return (<a href='#' onClick={doLogin}>Login</a>)
   }
 
   render () {
