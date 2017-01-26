@@ -1,13 +1,13 @@
 import Router from 'next/router'
 import StepNav from '~/components/Content/Lesson/StepNav'
 import Lesson from './'
-import { GetEnv } from '~/lib/env'
 import * as userActions from '~/actions/user'
 import WithActions from '~/lib/with-actions'
 
-let StepNavContainer = WithActions((props, changeProps) => ({
+export default WithActions((env, props, changeProps) => ({
   onNext: async (nextStep) => {
-    const { lokkaClient, courseId, lessonId } = props
+    const { lokkaClient } = env
+    const { courseId, lessonId } = props
     changeProps({ loading: true })
 
     // Do the mutation
@@ -55,7 +55,3 @@ let StepNavContainer = WithActions((props, changeProps) => ({
     userActions.login()
   }
 }))(StepNav)
-
-StepNavContainer = GetEnv()(StepNavContainer)
-
-export default StepNavContainer

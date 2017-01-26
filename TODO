@@ -1,6 +1,6 @@
 * [x] Implement proper auth stuff (Login redirects, etc)
 * [x] Get the proper email from GitHub
-* [ ] In the local client cache, always keep a value. Only clear it if the timeout exceeded and do it when we are refetching it.
+* [x] In the local client cache, always keep a value. Only clear it if the timeout exceeded and do it when we are refetching it.
 * [ ] Refactor container libs, actions and stuff
 * [ ] Show the total points for the user
 * [ ] Show the leaderboard

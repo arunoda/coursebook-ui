@@ -1,15 +1,15 @@
 import AnswerBox from '~/components/Content/Lesson/AnswerBox'
 import Lesson from './'
-import { GetEnv } from '~/lib/env'
 import WithActions from '~/lib/with-actions'
 
-let AnswerBoxContainer = WithActions((props, changeProps) => ({
+export default WithActions((env, props, changeProps) => ({
   onSubmit: async (answer) => {
     if (!answer) {
       throw new Error('Need an answer')
     }
 
-    const { courseId, lessonId, step, lokkaClient } = props
+    const { lokkaClient } = env
+    const { courseId, lessonId, step } = props
     changeProps({ loading: true })
 
     const { updatedStep } = await lokkaClient.mutate(`
@@ -37,7 +37,3 @@ let AnswerBoxContainer = WithActions((props, changeProps) => ({
     changeProps({ loading: false })
   }
 }))(AnswerBox)
-
-AnswerBoxContainer = GetEnv()(AnswerBoxContainer)
-
-export default AnswerBoxContainer

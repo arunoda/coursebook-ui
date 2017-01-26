@@ -17,7 +17,7 @@ export default class Header extends React.Component {
   }
 
   renderLoginLink () {
-    const { store } = this.props
+    const store = this.props.nextEnv.store
     const loginToken = store.get('loginToken')
 
     if (loginToken) {

@@ -2,7 +2,9 @@ import Header from '~/containers/Header'
 import Navigation from '~/containers/Content/Navigation'
 import Lesson from '~/containers/Content/Lesson'
 import getLokkaClient from '~/lib/lokka'
-import { getInitialState, WithEnv } from '~/lib/env'
+import { getInitialState } from '~/lib/env'
+import InitPage from '~/lib/init-page'
+import Podda from 'podda'
 
 const styles = {
   navigation: {
@@ -17,7 +19,7 @@ const styles = {
   }
 }
 
-let Content = (props) => (
+const Content = (props) => (
   <div>
     <Header />
     <div>
@@ -31,26 +33,23 @@ let Content = (props) => (
   </div>
 )
 
-Content = WithEnv()(Content)
+export default InitPage({
+  rootContainers: [Navigation, Lesson],
+  getProps: (context) => {
+    const { query } = context
+    const initialState = getInitialState(context)
 
-Content.getInitialProps = async (context) => {
-  const { query } = context
-  const initialState = getInitialState(context)
-  const env = {
-    lokkaClient: getLokkaClient(initialState)
+    return {
+      courseId: query.course,
+      lessonId: query.lesson,
+      stepId: query.step,
+      initialState
+    }
+  },
+  getEnv: (props) => {
+    return {
+      store: new Podda(props.initialState),
+      lokkaClient: getLokkaClient(props.initialState)
+    }
   }
-
-  const props = {
-    courseId: query.course,
-    lessonId: query.lesson,
-    stepId: query.step,
-    initialState
-  }
-
-  Object.assign(props, await Navigation.fetch(env, props))
-  Object.assign(props, await Lesson.fetch(env, props))
-
-  return props
-}
-
-export default Content
+})(Content)

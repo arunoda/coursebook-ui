@@ -1,5 +1,7 @@
+import Podda from 'podda'
 import Header from '~/containers/Header'
-import { getInitialState, WithEnv } from '~/lib/env'
+import { getInitialState } from '~/lib/env'
+import InitPage from '~/lib/init-page'
 
 let HomePage = () => (
   <div>
@@ -8,11 +10,14 @@ let HomePage = () => (
   </div>
 )
 
-HomePage = WithEnv()(HomePage)
-
-HomePage.getInitialProps = function (context) {
-  const initialState = getInitialState(context)
-  return { initialState }
-}
-
-export default HomePage
+export default InitPage({
+  getProps: (context) => {
+    const initialState = getInitialState(context)
+    return { initialState }
+  },
+  getEnv: (props) => {
+    return {
+      store: new Podda(props.initialState)
+    }
+  }
+})(HomePage)
