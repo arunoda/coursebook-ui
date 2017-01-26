@@ -1,8 +1,8 @@
 * [x] Implement proper auth stuff (Login redirects, etc)
-* [ ] Get the proper email from GitHub
+* [x] Get the proper email from GitHub
 * [ ] Show the total points for the user
 * [ ] Show the leaderboard
-* [ ] Refactor container libs and stuff
+* [ ] Refactor container libs, actions and stuff
 * [ ] Style it
 * [ ] Try to make the UI modular and updatable.
 * [ ] Deploy Learn GraphQL with this

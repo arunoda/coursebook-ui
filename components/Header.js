@@ -19,7 +19,9 @@ let Header = class extends React.Component {
       const doLogout = (e) => {
         e.preventDefault()
         const camebackUrl = `${location.href}?logout=1`
-        const href = `http://localhost:3003/logout?appRedirectUrl=${encodeURIComponent(camebackUrl)}`
+        // It's important to send the loginToken since that's the way
+        // how we say our auth server to logout the user
+        const href = `http://localhost:3003/logout?loginToken=${loginToken}&appRedirectUrl=${encodeURIComponent(camebackUrl)}`
         location.href = href
       }
 
