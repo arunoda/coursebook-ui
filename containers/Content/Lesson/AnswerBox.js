@@ -1,7 +1,7 @@
-import AnswerBox from '../../../components/Content/Lesson/AnswerBox'
+import AnswerBox from '~/components/Content/Lesson/AnswerBox'
 import Lesson from './'
-import { GetEnv } from '../../../lib/env'
-import WithActions from '../../../lib/with-actions'
+import { GetEnv } from '~/lib/env'
+import WithActions from '~/lib/with-actions'
 
 let AnswerBoxContainer = WithActions((props, changeProps) => ({
   onSubmit: async (answer) => {

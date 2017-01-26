@@ -1,8 +1,8 @@
-import Header from '../containers/Header'
-import Navigation from '../containers/Content/Navigation'
-import Lesson from '../containers/Content/Lesson'
-import getLokkaClient from '../lib/lokka'
-import { getInitialState, WithEnv } from '../lib/env'
+import Header from '~/containers/Header'
+import Navigation from '~/containers/Content/Navigation'
+import Lesson from '~/containers/Content/Lesson'
+import getLokkaClient from '~/lib/lokka'
+import { getInitialState, WithEnv } from '~/lib/env'
 
 const styles = {
   navigation: {

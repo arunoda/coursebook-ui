@@ -700,6 +700,12 @@ babel-register@^6.18.0, babel-register@^6.22.0:
     mkdirp "^0.5.1"
     source-map-support "^0.4.2"
 
+babel-root-import:
+  version "4.1.5"
+  resolved "https://registry.yarnpkg.com/babel-root-import/-/babel-root-import-4.1.5.tgz#cb2b8163af1c4935d8fb570b5369154317a84f96"
+  dependencies:
+    slash "^1.0.0"
+
 babel-runtime@^6.0.0, babel-runtime@^6.11.6, babel-runtime@^6.18.0, babel-runtime@^6.22.0, babel-runtime@^6.9.0, babel-runtime@^6.9.1, babel-runtime@6.x.x:
   version "6.22.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.22.0.tgz#1cf8b4ac67c77a4ddb0db2ae1f74de52ac4ca611"

@@ -1,5 +1,5 @@
-import Navigation from '../../components/Content/Navigation'
-import WithData from '../../lib/with-data'
+import Navigation from '~/components/Content/Navigation'
+import WithData from '~/lib/with-data'
 
 export default WithData({
   propsToWatch: [],

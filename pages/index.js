@@ -1,5 +1,5 @@
-import Header from '../containers/Header'
-import { getInitialState, WithEnv } from '../lib/env'
+import Header from '~/containers/Header'
+import { getInitialState, WithEnv } from '~/lib/env'
 
 let HomePage = () => (
   <div>
