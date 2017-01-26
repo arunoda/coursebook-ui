@@ -2,7 +2,7 @@ import Header from '~/containers/Header'
 import Navigation from '~/containers/Content/Navigation'
 import Lesson from '~/containers/Content/Lesson'
 import getLokkaClient from '~/lib/lokka'
-import { getInitialState } from '~/lib/env'
+import getInitialState from '~/lib/state'
 import InitPage from '~/lib/init-page'
 import Podda from 'podda'
 

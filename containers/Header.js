@@ -1,5 +1,5 @@
 import Header from '~/components/Header'
-import { GetEnv } from '~/lib/env'
+import WithEnv from '~/lib/with-env'
 import WithActions from '~/lib/with-actions'
 import * as userActions from '~/actions/user'
 
@@ -10,4 +10,4 @@ const HeaderComponent = WithActions((env, props) => ({
   }
 }))(Header)
 
-export default GetEnv()(HeaderComponent)
+export default WithEnv()(HeaderComponent)

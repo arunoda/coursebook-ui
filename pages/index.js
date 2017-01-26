@@ -1,6 +1,6 @@
 import Podda from 'podda'
 import Header from '~/containers/Header'
-import { getInitialState } from '~/lib/env'
+import getInitialState from '~/lib/state'
 import InitPage from '~/lib/init-page'
 
 let HomePage = () => (
