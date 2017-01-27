@@ -1,10 +1,11 @@
 * [x] Implement proper auth stuff (Login redirects, etc)
 * [x] Get the proper email from GitHub
 * [x] In the local client cache, always keep a value. Only clear it if the timeout exceeded and do it when we are refetching it.
-* [ ] Refactor container libs, actions and stuff
+* [x] Refactor container libs, actions and stuff
 * [ ] Show the total points for the user
 * [ ] Show the leaderboard
 * [ ] Style it
+* [x] Pass data to root containers via context
 * [ ] Try to make the UI modular and updatable.
 * [ ] Deploy Learn GraphQL with this
 * [ ] Isolate it and allow to use this with multiple projects
