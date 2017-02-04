@@ -1,5 +1,6 @@
 import AnswerBox from '~/components/Content/Lesson/AnswerBox'
 import Lesson from './'
+import Header from '~/containers/Header'
 import WithActions from '~/lib/with-actions'
 
 export default WithActions((env, props, changeProps) => ({
@@ -20,7 +21,8 @@ export default WithActions((env, props, changeProps) => ({
           stepId: "${step.id}"
           answer: "${answer}"
         ) {
-          ...${AnswerBox.fragment(lokkaClient)}
+          ...${AnswerBox.fragment(lokkaClient)},
+          points
         }
       }
     `)
@@ -32,6 +34,14 @@ export default WithActions((env, props, changeProps) => ({
 
       return item
     })
+
+    // Update the cache for the points
+    if (updatedStep.correctAnswer === answer) {
+      Header.updateCache({}, (item) => {
+        item.user.points += updatedStep.points
+        return item
+      })
+    }
 
     // send the updated step to the component
     changeProps({ loading: false })

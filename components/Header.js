@@ -27,13 +27,36 @@ export default class Header extends React.Component {
     return (<a href='#' onClick={(e) => this.fireAction(e, 'onLogin')}>Login</a>)
   }
 
+  renderUserInfo () {
+    const { user } = this.props
+    if (!user) return null
+
+    return (
+      <span> - {user.name}({user.points})</span>
+    )
+  }
+
   render () {
     return (
       <div className='header'>
         <A href='/'>Home</A>
         <A href='/content?course=first-course&lesson=lesson-one' as='/first-course/lesson-one'>Content</A>
         { this.renderLoginLink() }
+        { this.renderUserInfo() }
       </div>
     )
   }
 }
+
+Header.propTypes = {
+  user: React.PropTypes.object,
+  onLogout: React.PropTypes.func,
+  onLogin: React.PropTypes.func
+}
+
+Header.userFragment = (c) => c.createFragment(`
+  fragment on User {
+    points,
+    name
+  }
+`)

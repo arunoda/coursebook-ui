@@ -1,6 +1,7 @@
 import Router from 'next/router'
 import StepNav from '~/components/Content/Lesson/StepNav'
 import Lesson from './'
+import Header from '~/containers/Header'
 import * as userActions from '~/actions/user'
 import WithActions from '~/lib/with-actions'
 
@@ -21,15 +22,24 @@ export default WithActions((env, props, changeProps) => ({
           )
         }
       `)
+
+      // Update the local cache for the changes in the mutation
+      Lesson.updateCache({ courseId, lessonId }, (item) => {
+        const step = item.course.lessons[0].steps.find((s) => s.id === nextStep.id)
+        step.visited = true
+
+        return item
+      })
+
+      // Update the local cache for points
+      Header.updateCache({}, (item) => {
+        if (nextStep.type === 'text') {
+          item.user.points += nextStep.points
+        }
+
+        return item
+      })
     }
-
-    // Update the local cache for the changes in the mutation
-    Lesson.updateCache({ courseId, lessonId }, (item) => {
-      const step = item.course.lessons[0].steps.find((s) => s.id === nextStep.id)
-      step.visited = true
-
-      return item
-    })
 
     // Change the route
     changeProps({ loading: false })

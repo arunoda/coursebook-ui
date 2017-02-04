@@ -34,7 +34,7 @@ const Content = (props) => (
 )
 
 export default InitPage({
-  rootContainers: [Navigation, Lesson],
+  rootContainers: [Header, Navigation, Lesson],
   getProps: (context) => {
     const { query } = context
     const initialState = getInitialState(context)
