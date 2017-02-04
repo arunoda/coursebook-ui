@@ -2,14 +2,15 @@
 * [x] Get the proper email from GitHub
 * [x] In the local client cache, always keep a value. Only clear it if the timeout exceeded and do it when we are refetching it.
 * [x] Refactor container libs, actions and stuff
-* [ ] Show the total points for the user
-* [ ] Show the leaderboard
-* [ ] Style it
+* [x] Show the total points for the user
 * [x] Pass data to root containers via context
-* [ ] Try to make the UI modular and updatable.
+* [ ] Style it
+* [ ] Try to make the UI modular and updatable. (via some env config - with babel)
 * [ ] Deploy Learn GraphQL with this
-* [ ] Isolate it and allow to use this with multiple projects
-* [ ] Launch next-data
 * [ ] Launch bulletproofnext.com
+* [ ] Show the leaderboard
+* [ ] Launch next-data
 * [ ] Launch coursebook to the web
 * [ ] Add payments support
+* [ ] Add support for Rx.js for fetch
+* [ ] Move caching to Lokka or use something else
