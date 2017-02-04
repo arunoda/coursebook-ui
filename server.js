@@ -40,13 +40,15 @@ app.prepare()
     server.get('/:course/:lesson/:step?', (req, res) => {
       const { course, lesson, step } = req.params
       if (course === '_webpack' || course === '_next') {
-        return handler(req, res)
+        return handler(req, res, req._parsedUrl)
       }
 
       app.render(req, res, '/content', { course, lesson, step })
     })
 
-    server.use(handler)
+    server.use((req, res) => {
+      handler(req, res, req._parsedUrl)
+    })
     server.listen(port)
   })
   .catch((ex) => {

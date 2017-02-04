@@ -28,6 +28,7 @@
     "js-cookies": "^1.0.4",
     "lokka": "^1.7.0",
     "lokka-transport-http": "^1.6.1",
+    "mitt": "^1.0.1",
     "next": "^2.0.0-beta",
     "podda": "^1.2.2",
     "recompose": "^0.21.2"
