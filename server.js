@@ -47,7 +47,7 @@ app.prepare()
     })
 
     server.use((req, res) => {
-      handler(req, res, req._parsedUrl)
+      handler(req, res)
     })
     server.listen(port)
   })
