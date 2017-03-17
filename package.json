@@ -28,6 +28,8 @@
     "js-cookies": "^1.0.4",
     "lokka": "^1.7.0",
     "lokka-transport-http": "^1.6.1",
+    "markd": "^1.2.0",
+    "marked": "^0.3.6",
     "mitt": "^1.0.1",
     "next": "^2.0.0-beta.25",
     "podda": "^1.2.2",

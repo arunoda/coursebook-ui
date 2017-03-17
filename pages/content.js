@@ -21,7 +21,7 @@ const Content = (props) => (
     </div>
     <style jsx>{`
       .content {
-        margin: 10px 0 0 0;
+        margin: 30px 0 0 0;
       }
 
       .navigation {

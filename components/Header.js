@@ -79,6 +79,7 @@ export default class Header extends React.Component {
           .header {
             padding: 40px 50px;
             font-size: 14px;
+            border-bottom: 1px solid #DDD
           }
         `}</style>
       </div>

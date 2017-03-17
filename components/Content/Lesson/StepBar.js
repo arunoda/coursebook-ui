@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import Router from 'next/router'
 
 const styles = {
   bold: {
@@ -8,7 +9,10 @@ const styles = {
 }
 
 const Step = (props) => (
-  <div className={props.className}>
+  <div 
+    className={props.className}
+    onClick={() => Router.push(props.href, props.as)}
+  >
     {props.href? (
       <Link
         href={props.href}
@@ -26,6 +30,7 @@ const Step = (props) => (
         margin-right: 5px;
         border: 1px solid #DDD;
         border-radius: 3px;
+        cursor: pointer;
       }
 
       div:hover {
@@ -38,8 +43,7 @@ const Step = (props) => (
       }
 
       .selected {
-        border: 1px solid #888;
-        background-color: #fafafa;
+        border: 1px solid #E25E5E;
       }
     `}</style>
   </div>

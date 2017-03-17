@@ -2,12 +2,13 @@ import React from 'react'
 import StepBar from './StepBar'
 import StepNav from '~/containers/Content/Lesson/StepNav'
 import AnswerBox from '~/containers/Content/Lesson/AnswerBox'
+import Markdown from './Markdown'
 
-let Lesson = class extends React.Component {
+const Lesson = class extends React.Component {
   renderContent (lesson) {
     const { stepId } = this.props
     if (!stepId) {
-      return lesson.intro
+      return (<Markdown content={lesson.intro}/>)
     }
 
     if (!lesson.steps) {
@@ -15,7 +16,7 @@ let Lesson = class extends React.Component {
     }
 
     const step = lesson.steps.find((s) => s.id === stepId)
-    if (step.visited) return step.text
+    if (step.visited) return (<Markdown content={step.text}/>)
 
     return (<p>'Not Visited Yet!'</p>)
   }
@@ -29,16 +30,26 @@ let Lesson = class extends React.Component {
       <div className='lesson-area'>
         <h2>{lesson.name}</h2>
         <StepBar steps={lesson.steps || []} courseId={courseId} lessonId={lessonId} currentStepId={stepId} />
-        <p>
+        <div className='content'>
           {this.renderContent(lesson)}
-        </p>
+        </div>
         {(step && step.type === 'mcq') ? <AnswerBox courseId={courseId} lessonId={lessonId} step={step} /> : null }
         <StepNav steps={lesson.steps} courseId={courseId} lessonId={lessonId} currentStepId={stepId} allCourses={allCourses} />
         <style jsx>{`
           h2 {
-            margin: 0 0 10px 0;
+            margin: 0 0 20px 0;
             padding: 0;
-            font-size: 22px;
+            font-size: 25px;
+            color: #333;
+          }
+
+          .lesson-area {
+            border-left: 1px solid #DDD;
+            padding-left: 20px;
+          }
+
+          .content {
+            margin: 20px 0 0 0;
           }
         `}</style>
       </div>

@@ -24,6 +24,10 @@ class Navigation extends React.Component {
           </a>
         </Link>
         <style jsx>{`
+          div {
+            margin: 0 0 8px 0;
+          }
+
           a {
             color: #444;
             text-decoration: none;
@@ -38,7 +42,7 @@ class Navigation extends React.Component {
 
           .selected {
             font-weight: 600;
-            color: #000;
+            color: #E25E5E;
           }
         `}</style>
       </div>
@@ -55,7 +59,7 @@ class Navigation extends React.Component {
         <style jsx>{`
           h3 {
             padding: 0;
-            margin: 0 0 10px 0;
+            margin: 0 0 15px 0;
             font-size: 18px;
             font-weight: 600;
           }
