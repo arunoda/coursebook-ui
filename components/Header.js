@@ -2,9 +2,41 @@ import React from 'react'
 import Link from 'next/link'
 
 const A = (props) => (
-  <Link href={props.href} as={props.as} onClick={props.onClick}>
+  <span>
+    <Link href={props.href} as={props.as} onClick={props.onClick}>
+      <a style={{ marginRight: 10 }} {...props} />
+    </Link>
+    <style jsx>{`
+      a {
+        color: #000;
+        text-decoration: none;
+        padding-right: 10px;
+        font-weight: 600;
+      }
+
+      a:hover {
+        opacity: 0.6;
+      }
+    `}</style>
+  </span>
+)
+
+const ANormal = (props) => (
+  <span>
     <a style={{ marginRight: 10 }} {...props} />
-  </Link>
+    <style jsx>{`
+      a {
+        color: #000;
+        text-decoration: none;
+        padding-right: 10px;
+        font-weight: 600;
+      }
+
+      a:hover {
+        opacity: 0.6;
+      }
+    `}</style>
+  </span>
 )
 
 export default class Header extends React.Component {
@@ -21,10 +53,10 @@ export default class Header extends React.Component {
     const loginToken = store.get('loginToken')
 
     if (loginToken) {
-      return (<a href='#' onClick={(e) => this.fireAction(e, 'onLogout', loginToken)}>Logout</a>)
+      return (<ANormal href='#' onClick={(e) => this.fireAction(e, 'onLogout', loginToken)}>Logout</ANormal>)
     }
 
-    return (<a href='#' onClick={(e) => this.fireAction(e, 'onLogin')}>Login</a>)
+    return (<ANormal href='#' onClick={(e) => this.fireAction(e, 'onLogin')}>Login</ANormal>)
   }
 
   renderUserInfo () {
@@ -32,7 +64,7 @@ export default class Header extends React.Component {
     if (!user) return null
 
     return (
-      <span> - {user.name}({user.points})</span>
+      <span>{user.name}({user.points} points)</span>
     )
   }
 
@@ -43,6 +75,12 @@ export default class Header extends React.Component {
         <A href='/content?course=first-course&lesson=lesson-one' as='/first-course/lesson-one'>Content</A>
         { this.renderLoginLink() }
         { this.renderUserInfo() }
+        <style jsx>{`
+          .header {
+            padding: 40px 50px;
+            font-size: 14px;
+          }
+        `}</style>
       </div>
     )
   }

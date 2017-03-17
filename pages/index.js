@@ -3,12 +3,13 @@ import Header from '~/containers/Header'
 import getInitialState from '~/lib/state'
 import getLokkaClient from '~/lib/lokka'
 import InitPage from '~/lib/init-page'
+import Layout from '~/components/Layout'
 
 let HomePage = () => (
-  <div>
+  <Layout>
     <Header />
     <div>Home Page</div>
-  </div>
+  </Layout>
 )
 
 export default InitPage({

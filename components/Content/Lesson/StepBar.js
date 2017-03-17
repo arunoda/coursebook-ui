@@ -2,17 +2,48 @@ import React from 'react'
 import Link from 'next/link'
 
 const styles = {
-  step: {
-    display: 'inline-block',
-    margin: 5,
-    padding: 2,
-    border: '1px solid #EEE',
-    minWidth: 20
-  },
   bold: {
     fontWeight: 800
   }
 }
+
+const Step = (props) => (
+  <div className={props.className}>
+    {props.href? (
+      <Link
+        href={props.href}
+        as={props.as}
+      >
+        <a>{props.name}</a>
+      </Link>
+    ) : <a>{props.name}</a>}
+
+    <style jsx>{`
+      div {
+        display: inline-block;
+        padding: 5px 8px;
+        font-size: 13px;
+        margin-right: 5px;
+        border: 1px solid #DDD;
+        border-radius: 3px;
+      }
+
+      div:hover {
+        border: 1px solid #03a9f4;
+      }
+
+      a {
+        color: #000;
+        text-decoration: none;
+      }
+
+      .selected {
+        border: 1px solid #888;
+        background-color: #fafafa;
+      }
+    `}</style>
+  </div>
+)
 
 class StepBar extends React.Component {
   renderStep (step, index) {
@@ -20,40 +51,35 @@ class StepBar extends React.Component {
 
     if (!step.visited) {
       return (
-        <div style={styles.step} key={index}>
-          {step.points}
-        </div>
+        <Step
+          key={index}
+          name={step.points}
+        />
       )
     }
 
-    const itemStyle = step.id === currentStepId ? styles.bold : {}
-
     return (
-      <div style={styles.step} key={index}>
-        <Link
-          href={`/content?course=${courseId}&lesson=${lessonId}&step=${step.id}`}
-          as={`/${courseId}/${lessonId}/${step.id}`}
-        >
-          <a style={itemStyle}>{step.points}</a>
-        </Link>
-      </div>
+      <Step 
+        key={index}
+        className={step.id === currentStepId ? "selected" : null}
+        href={`/content?course=${courseId}&lesson=${lessonId}&step=${step.id}`}
+        as={`/${courseId}/${lessonId}/${step.id}`}
+        name={step.points}
+      />
     )
   }
 
   render () {
     const { steps, courseId, lessonId, currentStepId } = this.props
 
-    const introStyle = !currentStepId ? styles.bold : {}
     return (
       <div>
-        <div style={styles.step}>
-          <Link
-            href={`/content?course=${courseId}&lesson=${lessonId}`}
-            as={`/${courseId}/${lessonId}`}
-          >
-            <a style={introStyle}>Introduction</a>
-          </Link>
-        </div>
+        <Step
+          className={!currentStepId ? "selected" : null}
+          href={`/content?course=${courseId}&lesson=${lessonId}`}
+          as={`/${courseId}/${lessonId}`}
+          name="Introduction"
+        />
         {steps.map((s, i) => this.renderStep(s, i))}
       </div>
     )

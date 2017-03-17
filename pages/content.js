@@ -1,36 +1,42 @@
+import Podda from 'podda'
 import Header from '~/containers/Header'
 import Navigation from '~/containers/Content/Navigation'
 import Lesson from '~/containers/Content/Lesson'
 import getLokkaClient from '~/lib/lokka'
 import getInitialState from '~/lib/state'
 import InitPage from '~/lib/init-page'
-import Podda from 'podda'
+import Layout from '~/components/Layout'
 
-const styles = {
-  navigation: {
-    display: 'inline-block',
-    verticalAlign: 'top',
-    width: '25%'
-  },
-  lesson: {
-    display: 'inline-block',
-    verticalAlign: 'top',
-    width: '75%'
-  }
-}
 
 const Content = (props) => (
-  <div>
+  <Layout>
     <Header />
-    <div>
-      <div style={styles.navigation}>
+    <div className='content'>
+      <div className='navigation'>
         <Navigation {...props} />
       </div>
-      <div style={styles.lesson}>
+      <div className='lesson'>
         <Lesson {...props} />
       </div>
     </div>
-  </div>
+    <style jsx>{`
+      .content {
+        margin: 10px 0 0 0;
+      }
+
+      .navigation {
+        display: inline-block;
+        vertical-align: top;
+        width: 25%;
+      }
+
+      .lesson {
+        display: inline-block;
+        vertical-align: top;
+        width: 75%;
+      }
+    `}</style>
+  </Layout>
 )
 
 export default InitPage({

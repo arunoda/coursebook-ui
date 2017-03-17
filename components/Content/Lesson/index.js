@@ -26,7 +26,7 @@ let Lesson = class extends React.Component {
     const step = lesson.steps ? lesson.steps.find((s) => s.id === stepId) : null
 
     return (
-      <div>
+      <div className='lesson-area'>
         <h2>{lesson.name}</h2>
         <StepBar steps={lesson.steps || []} courseId={courseId} lessonId={lessonId} currentStepId={stepId} />
         <p>
@@ -34,6 +34,13 @@ let Lesson = class extends React.Component {
         </p>
         {(step && step.type === 'mcq') ? <AnswerBox courseId={courseId} lessonId={lessonId} step={step} /> : null }
         <StepNav steps={lesson.steps} courseId={courseId} lessonId={lessonId} currentStepId={stepId} allCourses={allCourses} />
+        <style jsx>{`
+          h2 {
+            margin: 0 0 10px 0;
+            padding: 0;
+            font-size: 22px;
+          }
+        `}</style>
       </div>
     )
   }
