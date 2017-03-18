@@ -9,7 +9,7 @@ const styles = {
 }
 
 const Step = (props) => (
-  <div 
+  <div
     className={props.className}
     onClick={() => Router.push(props.href, props.as)}
   >
@@ -34,16 +34,17 @@ const Step = (props) => (
       }
 
       div:hover {
-        border: 1px solid #03a9f4;
+        border: 1px solid #8fdcff;
       }
 
       a {
         color: #000;
         text-decoration: none;
+        font-weight: 600;
       }
 
-      .selected {
-        border: 1px solid #E25E5E;
+      .selected a {
+        color: #E25E5E;
       }
     `}</style>
   </div>
@@ -63,7 +64,7 @@ class StepBar extends React.Component {
     }
 
     return (
-      <Step 
+      <Step
         key={index}
         className={step.id === currentStepId ? "selected" : null}
         href={`/content?course=${courseId}&lesson=${lessonId}&step=${step.id}`}
