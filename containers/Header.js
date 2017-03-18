@@ -7,6 +7,7 @@ import * as userActions from '~/actions/user'
 let HeaderComponent
 
 HeaderComponent = WithData({
+  id: 'Header',
   propsToWatch: [],
   cacheOptions: { client: 1000 * 60 * 5 },
   fetch ({ lokkaClient }, props) {

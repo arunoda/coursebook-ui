@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/arunoda/coursebook-ui#readme",
   "dependencies": {
+    "babel-plugin-transform-define": "^1.2.0",
     "babel-root-import": "^4.1.5",
     "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
@@ -31,7 +32,7 @@
     "markd": "^1.2.0",
     "marked": "^0.3.6",
     "mitt": "^1.0.1",
-    "next": "^2.0.0-beta.25",
+    "next": "^2.0.0-beta.39",
     "podda": "^1.2.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",

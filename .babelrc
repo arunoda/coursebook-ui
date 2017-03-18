@@ -3,6 +3,7 @@
     "next/babel"
   ],
   "plugins": [
-    "babel-root-import"
+    "babel-root-import",
+    ["transform-define", "./env-config.js"]
   ]
 }
