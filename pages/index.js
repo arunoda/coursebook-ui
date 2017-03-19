@@ -4,6 +4,7 @@ import getInitialState from '~/lib/state'
 import getLokkaClient from '~/lib/lokka'
 import InitPage from '~/lib/init-page'
 import Layout from '~/components/Layout'
+import Link from 'next/link'
 
 let HomePage = () => (
   <Layout>
@@ -13,7 +14,9 @@ let HomePage = () => (
       <h1 className="learning">Learning Next.js</h1>
       <h2 className="creators">( A Guide from the Creators )</h2>
       <div className="call-to-action">
-        <a href="/content" as="/start">Start Now</a>
+        <Link href="/content" as="/start">
+          <a>Start Now</a>
+        </Link>
       </div>
     </div>
     <style jsx>{`

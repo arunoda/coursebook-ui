@@ -9,7 +9,13 @@ const styles = {
 
 class Navigation extends React.Component {
   renderLesson (course, lesson, index) {
-    const { courseId, lessonId } = this.props
+    let { courseId, lessonId, courses } = this.props
+    // courseId can be null in the `/start` page.
+    // Then we should select the first course and lesson.
+    if (!courseId) {
+      courseId = courses[0].id
+      lessonId = courses[0].lessons[0].id
+    }
     const selectedClassName = (course.id === courseId && lesson.id === lessonId) ? 'selected' : ''
 
     return (
@@ -89,8 +95,8 @@ class Navigation extends React.Component {
 
 Navigation.propTypes = {
   courses: React.PropTypes.array.isRequired,
-  courseId: React.PropTypes.string.isRequired,
-  lessonId: React.PropTypes.string.isRequired
+  courseId: React.PropTypes.string,
+  lessonId: React.PropTypes.string
 }
 
 Navigation.courseFragment = (c) => c.createFragment(`

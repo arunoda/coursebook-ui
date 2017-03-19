@@ -37,6 +37,10 @@ app.prepare()
       return res.redirect(req._parsedUrl.pathname)
     })
 
+    server.get('/start', (req, res) => {
+      app.render(req, res, '/content', {})
+    })
+
     server.get('/:course/:lesson/:step?', (req, res) => {
       const { course, lesson, step } = req.params
       if (course === '_webpack' || course === '_next') {

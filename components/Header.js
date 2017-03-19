@@ -72,7 +72,7 @@ export default class Header extends React.Component {
     return (
       <div className='header'>
         <A href='/'>Home</A>
-        <A href='/content?course=first-course&lesson=lesson-one' as='/first-course/lesson-one'>Content</A>
+        <A href='/content' as='/start'>Content</A>
         { this.renderLoginLink() }
         { this.renderUserInfo() }
         <style jsx>{`

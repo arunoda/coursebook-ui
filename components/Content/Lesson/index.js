@@ -22,19 +22,19 @@ const Lesson = class extends React.Component {
   }
 
   render () {
-    const { course, courseId, lessonId, stepId, allCourses } = this.props
+    const { course, stepId, allCourses } = this.props
     const lesson = course.lessons[0]
     const step = lesson.steps ? lesson.steps.find((s) => s.id === stepId) : null
 
     return (
       <div className='lesson-area'>
         <h2>{lesson.name}</h2>
-        <StepBar steps={lesson.steps || []} courseId={courseId} lessonId={lessonId} currentStepId={stepId} />
+        <StepBar steps={lesson.steps || []} courseId={course.id} lessonId={lesson.id} currentStepId={stepId} />
         <div className='content'>
           {this.renderContent(lesson)}
         </div>
-        {(step && step.type === 'mcq') ? <AnswerBox courseId={courseId} lessonId={lessonId} step={step} /> : null }
-        <StepNav steps={lesson.steps} courseId={courseId} lessonId={lessonId} currentStepId={stepId} allCourses={allCourses} />
+        {(step && step.type === 'mcq') ? <AnswerBox courseId={course.id} lessonId={lesson.id} step={step} /> : null }
+        <StepNav steps={lesson.steps} courseId={course.id} lessonId={lesson.id} currentStepId={stepId} allCourses={allCourses} />
         <style jsx>{`
           h2 {
             margin: 0 0 20px 0;
@@ -58,8 +58,8 @@ const Lesson = class extends React.Component {
 }
 
 Lesson.propTypes = {
-  courseId: React.PropTypes.string.isRequired,
-  lessonId: React.PropTypes.string.isRequired,
+  courseId: React.PropTypes.string,
+  lessonId: React.PropTypes.string,
   stepId: React.PropTypes.string,
   course: React.PropTypes.object.isRequired,
   allCourses: React.PropTypes.array.isRequired
@@ -82,10 +82,14 @@ Lesson.courseFragment = (c, props) => {
     }
   `
 
+  // lessonId won't be there for the `/start` page.
+  // So, we need to send an empty [] to get the first lesson.
+  const lessonIdParam = props.lessonId? `"${props.lessonId}"` : ''
+
   return c.createFragment(`
     fragment on Course {
       id
-      lessons(ids: ["${props.lessonId}"]) {
+      lessons(ids: [${lessonIdParam}]) {
         id
         name
         intro
