@@ -18,7 +18,7 @@ let HomePage = () => (
     </div>
     <style jsx>{`
       .content {
-          margin: 100px 0 0 0;
+          margin: 120px 0 0 0;
           text-align: center;
           -webkit-font-smoothing: subpixel-antialiased;
           font-family: 'Source Sans Pro', sans-serif;
