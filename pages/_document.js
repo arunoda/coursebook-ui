@@ -12,6 +12,7 @@ export default class MyDocument extends Document {
     return (
      <html>
        <Head>
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,600" rel="stylesheet" />
        </Head>
        <body>
          <Main />
