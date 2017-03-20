@@ -12,7 +12,7 @@ let HomePage = () => (
     <div className="content">
       <h2 className="start">START</h2>
       <h1 className="learning">Learning Next.js</h1>
-      <h2 className="creators">( A Guide from the Creators )</h2>
+      <h2 className="tagline">To build server rendered JS web apps with React</h2>
       <div className="call-to-action">
         <Link href="/content" as="/start">
           <a>Start Now</a>
@@ -45,23 +45,23 @@ let HomePage = () => (
         line-height: 1;
       }
 
-      .creators {
+      .tagline {
         padding: 0;
         margin: 20px 0 0 0;
         color: #444;
         font-weight: 300;
-        font-size: 30px;
-        letter-spacing: 2px;
+        font-size: 25px;
+        letter-spacing: 1.5px;
       }
 
       .call-to-action {
-        margin: 50px 0 0 0;
+        margin: 60px 0 0 0;
       }
 
       a {
         font-size: 30px;
         font-weight: 300;
-        padding: 15px 60px;
+        padding: 12px 60px;
         line-height: 1;
         letter-spacing: 0.5px;
         color: white;
