@@ -45,10 +45,10 @@ export default WithActions((env, props, changeProps) => ({
     changeProps({ loading: false })
     const as = `/${courseId}/${lessonId}/${nextStep.id}`
     const href = `/content?course=${courseId}&lesson=${lessonId}&step=${nextStep.id}`
-    Router.push(href, as)
+    await changeRoute(href, as)
   },
 
-  onPrev: (prevStep) => {
+  onPrev: async (prevStep) => {
     const { courseId, lessonId } = props
     let as = `/${courseId}/${lessonId}`
     let href = `/content?course=${courseId}&lesson=${lessonId}`
@@ -58,10 +58,15 @@ export default WithActions((env, props, changeProps) => ({
       href = `${href}&step=${prevStep.id}`
     }
 
-    Router.push(href, as)
+    await changeRoute(href, as)
   },
 
   onLogin: () => {
     userActions.login()
   }
 }))(StepNav)
+
+async function changeRoute(href, as) {
+  await Router.push(href, as)
+  window.scrollTo(0, 0)
+}
