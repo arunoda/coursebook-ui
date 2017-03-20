@@ -34,6 +34,7 @@ const Content = (props) => (
         display: inline-block;
         vertical-align: top;
         width: 75%;
+        margin: 0 0 50px 0;
       }
     `}</style>
   </Layout>
