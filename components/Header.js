@@ -69,10 +69,13 @@ export default class Header extends React.Component {
   }
 
   render () {
+    const startHref = `/content?courseId=${FIRST_COURSE}&lessonId=${FIRST_LESSON}`
+    const startAs = `/${FIRST_COURSE}/${FIRST_LESSON}`
+
     return (
       <div className='header'>
         <A href='/'>Home</A>
-        <A href='/content' as='/start'>Content</A>
+        <A href={startHref} as={startAs}>Content</A>
         { this.renderLoginLink() }
         { this.renderUserInfo() }
         <style jsx>{`

@@ -6,6 +6,9 @@ import InitPage from '~/lib/init-page'
 import Layout from '~/components/Layout'
 import Link from 'next/link'
 
+const startHref = `/content?courseId=${FIRST_COURSE}&lessonId=${FIRST_LESSON}`
+const startAs = `/${FIRST_COURSE}/${FIRST_LESSON}`
+
 let HomePage = () => (
   <Layout>
     <Header />
@@ -14,7 +17,7 @@ let HomePage = () => (
       <h1 className="learning">Learning Next.js</h1>
       <h2 className="tagline">To build server rendered JS web apps with React</h2>
       <div className="call-to-action">
-        <Link href="/content" as="/start">
+        <Link href={startHref} as={startAs}>
           <a>Start Now</a>
         </Link>
       </div>
