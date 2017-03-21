@@ -6,7 +6,7 @@ import InitPage from '~/lib/init-page'
 import Layout from '~/components/Layout'
 import Link from 'next/link'
 
-const startHref = `/content?courseId=${FIRST_COURSE}&lessonId=${FIRST_LESSON}`
+const startHref = `/content?course=${FIRST_COURSE}&lesson=${FIRST_LESSON}`
 const startAs = `/${FIRST_COURSE}/${FIRST_LESSON}`
 
 let HomePage = () => (

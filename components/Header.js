@@ -69,7 +69,7 @@ export default class Header extends React.Component {
   }
 
   render () {
-    const startHref = `/content?courseId=${FIRST_COURSE}&lessonId=${FIRST_LESSON}`
+    const startHref = `/content?course=${FIRST_COURSE}&lesson=${FIRST_LESSON}`
     const startAs = `/${FIRST_COURSE}/${FIRST_LESSON}`
 
     return (
