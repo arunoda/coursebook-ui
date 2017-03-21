@@ -1,6 +1,6 @@
 ## Bugs
 
-* [ ] Start Now error when updating the cache. Try by removing user status code.
+* [x] Start Now error when updating the cache. Try by removing user status code.
 * [ ] If no user, clear the logic cookie
 * [ ] Style StepNav buttons
 * [ ] Style Answer Box.
