@@ -15,6 +15,81 @@ const styles = {
   }
 }
 
+const Area = (props) => (
+  <div>
+    {props.children}
+    <style jsx>{`
+      div {
+        border: 1px solid #FFE0B2;
+        max-width: 580px;
+        padding: 10px;
+        margin: 0 0 20px 0;
+        background-color: #FFF8E1;
+      }
+    `}</style>
+  </div>
+)
+
+class Answer extends React.Component {
+  render () {
+    const { answer, onChange, symbol } = this.props
+
+    return (
+      <div>
+        {symbol? symbol : (
+          <input
+            type='radio'
+            value={answer}
+            name='answer'
+            onChange={(e) => onChange(e)}
+          />
+        )}
+        <span>{answer}</span>
+        <style jsx>{`
+          div {
+            font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+            font-size: 15px;
+            margin: 0 0 5px 0;
+            letter-spacing: 0.1px;
+            vertical-align: center;
+          }
+
+          input {
+            margin: 0;
+            padding: 0;
+            top: -2px;
+            display: inline-block;
+          }
+
+          span {
+            margin: 0 0 0 10px;
+            display: inline-block;
+          }
+        `}</style>
+      </div>
+    )
+  }
+}
+
+const CorrectAnswer = ({ correctAnswer }) => (
+  <div>
+    <span><b>Correct answer is:</b> {correctAnswer}</span>
+    <style jsx>{`
+      div {
+        font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+        font-size: 14px;
+        margin: 15px 0 7px 0;
+      }
+
+      span {
+        padding: 3px 10px;
+        border-radius: 2px;
+        border: 2px solid #FF5722;
+      }
+    `}</style>
+  </div>
+)
+
 class AnswerBox extends React.Component {
   constructor (...args) {
     super(...args)
@@ -38,21 +113,34 @@ class AnswerBox extends React.Component {
     const { step } = this.props
 
     return (
-      <div style={styles.box}>
+      <Area>
         {step.answers.map((answer) => (
-          <div key={answer}>
-            <input
-              type='radio'
-              value={answer}
-              name='answer'
-              onChange={(e) => this.chooseAnswer(e)}
-            />
-            {answer}
-          </div>
+          <Answer
+            key={answer}
+            answer={answer}
+            onChange={(e) => this.chooseAnswer(e)}
+          />
         ))}
-        <br />
         <button onClick={() => this.handleSubmit()}>Submit</button>
-      </div>
+        <style jsx>{`
+          button {
+            margin: 10px 0 0 0;
+            border: 2px solid #2d88ba;
+            border-radius: 2px;
+            font-size: 12px;
+            padding: 3px 15px;
+            background-color: #00BCD4;
+            cursor: pointer;
+            color: #FFF;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+          }
+
+          button:hover {
+            opacity: 0.7;
+          }
+        `}</style>
+      </Area>
     )
   }
 
@@ -61,27 +149,25 @@ class AnswerBox extends React.Component {
     const isCorrect = step.givenAnswer === step.correctAnswer
 
     const getSymbol = (answer) => {
-      if (answer !== step.givenAnswer) return (<span>*</span>)
+      if (answer !== step.givenAnswer) return (<span>✦</span>)
       if (isCorrect) return (<span style={styles.green}>✓</span>)
       return (<span style={styles.red}>✘</span>)
     }
 
-    const correctAnswer = (
-      <div>
-        <br />
-        <b>Correct answer is:</b> {step.correctAnswer}
-      </div>
-    )
-
     return (
-      <div style={styles.box}>
+      <Area>
         {step.answers.map((answer) => (
-          <div key={answer}>
-            {getSymbol(answer)} {answer}
-          </div>
+          <Answer
+            key={answer}
+            answer={answer}
+            symbol={getSymbol(answer)}
+          />
         ))}
-        {!isCorrect ? correctAnswer : null}
-      </div>
+        {!isCorrect ? <CorrectAnswer correctAnswer={step.correctAnswer} /> : null}
+        <style jsx>{`
+
+        `}</style>
+      </Area>
     )
   }
 

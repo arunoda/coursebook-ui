@@ -10,7 +10,7 @@
 * [ ] Add a footer
 * [ ] If no user, clear the login cookie
 * [x] Style StepNav buttons
-* [ ] Style Answer Box.
+* [x] Style Answer Box.
 * [ ] Add SEO tags
 
 * [x] Implement proper auth stuff (Login redirects, etc)
