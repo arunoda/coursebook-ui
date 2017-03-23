@@ -8,8 +8,8 @@
 * [ ] Change the loading of the next button
 * [x] Make inactive step navs unclickable.
 * [ ] Add a footer
-* [ ] If no user, clear the logic cookie
-* [ ] Style StepNav buttons
+* [ ] If no user, clear the login cookie
+* [x] Style StepNav buttons
 * [ ] Style Answer Box.
 * [ ] Add SEO tags
 

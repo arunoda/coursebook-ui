@@ -1,13 +1,35 @@
 import React from 'react'
 import Router from 'next/router'
 
-const styles = {
-  item: {
-    display: 'inline-block',
-    margin: 5,
-    minWidth: 20
-  }
-}
+const Button = (props) => (
+  <button
+    {...props}
+  >
+    {props.children}
+    <style jsx>{`
+      button {
+        display: inline-block;
+        min-width: 80px;
+        margin: 0px 10px 0 0;
+        padding: 6px 15px;
+        line-height: 1;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: white;
+        background: #699141;
+        border: 2px solid #476c1d;
+        border-radius: 2px;
+        font-size: 13px;
+        cursor: pointer;
+        outline: 0;
+      }
+
+      button:hover {
+        opacity: 0.8;
+      }
+    `}</style>
+  </button>
+)
 
 class StepNav extends React.Component {
   getNextStep (direction) {
@@ -66,7 +88,7 @@ class StepNav extends React.Component {
     if (!urls) return null
 
     return (
-      <button onClick={() => Router.push(urls.href, urls.as)}>Next Lesson</button>
+      <Button onClick={() => Router.push(urls.href, urls.as)}>Next Lesson</Button>
     )
   }
 
@@ -74,22 +96,22 @@ class StepNav extends React.Component {
     const { steps, currentStepId, loading } = this.props
 
     if (loading) {
-      return (<div>'Loading...'</div>)
+      return (<div>Loading...</div>)
     }
 
     if (!steps) {
-      return (<button style={styles.item} onClick={() => this.fireLogin()}>Login & Start</button>)
+      return (<Button onClick={() => this.fireLogin()}>Login & Start</Button>)
     }
 
     if (!currentStepId) {
-      return (<button style={styles.item} onClick={() => this.fireNext()}>Start Now</button>)
+      return (<Button onClick={() => this.fireNext()}>Start Now</Button>)
     }
 
-    const nextStepButton = (<button style={styles.item} onClick={() => this.fireNext()}>Next</button>)
+    const nextStepButton = (<Button onClick={() => this.fireNext()}>Next</Button>)
 
     return (
       <div>
-        <button style={styles.item} onClick={() => this.firePrev()}>Prev</button>
+        <Button onClick={() => this.firePrev()}>Prev</Button>
         { this.hasNextStep() ? nextStepButton : this.getNextLesson() }
       </div>
     )

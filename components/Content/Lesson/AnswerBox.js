@@ -3,7 +3,7 @@ import React from 'react'
 const styles = {
   box: {
     border: '1px solid #DDD',
-    margin: 10,
+    margin: '10px 0 20px 0',
     padding: 10,
     backgroundColor: '#EFEFEF'
   },
