@@ -2,6 +2,7 @@ import React from 'react'
 import StepBar from './StepBar'
 import StepNav from '~/containers/Content/Lesson/StepNav'
 import AnswerBox from '~/containers/Content/Lesson/AnswerBox'
+import ErrorBox from '~/components/ErrorBox'
 import Markdown from './Markdown'
 
 const Lesson = class extends React.Component {
@@ -22,7 +23,10 @@ const Lesson = class extends React.Component {
   }
 
   render () {
-    const { course, courseId, lessonId, stepId, allCourses } = this.props
+    const { course, courseId, lessonId, stepId, allCourses, error } = this.props
+
+    if (error) return (<ErrorBox error={error} />)
+
     const lesson = course.lessons[0]
     const step = lesson.steps ? lesson.steps.find((s) => s.id === stepId) : null
 
@@ -58,11 +62,12 @@ const Lesson = class extends React.Component {
 }
 
 Lesson.propTypes = {
-  courseId: React.PropTypes.string.isRequired,
-  lessonId: React.PropTypes.string.isRequired,
+  error: React.PropTypes.object,
+  courseId: React.PropTypes.string,
+  lessonId: React.PropTypes.string,
   stepId: React.PropTypes.string,
-  course: React.PropTypes.object.isRequired,
-  allCourses: React.PropTypes.array.isRequired
+  course: React.PropTypes.object,
+  allCourses: React.PropTypes.array
 }
 
 Lesson.allCoursesFragment = (c) => c.createFragment(`

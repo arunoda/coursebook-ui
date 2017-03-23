@@ -45,11 +45,7 @@ export default InitPage({
   rootContainers: [Header, Navigation, Lesson],
   getProps: async (context) => {
     const { query } = context
-
     const initialState = getInitialState(context)
-    const lokkaClient = getLokkaClient(initialState)
-
-    await checkAuth(lokkaClient, initialState, context)
 
     return {
       courseId: query.course,
@@ -58,7 +54,7 @@ export default InitPage({
       initialState
     }
   },
-  getEnv: (props, context) => {
+  getEnv: (props) => {
     const store = new Podda(props.initialState)
     const lokkaClient = getLokkaClient(props.initialState)
 

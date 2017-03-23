@@ -13,19 +13,27 @@ export default WithActions((env, props, changeProps) => ({
     const { courseId, lessonId, step } = props
     changeProps({ loading: true })
 
-    const { updatedStep } = await lokkaClient.mutate(`
-      {
-        updatedStep: submitAnswer(
-          courseId: "${courseId}"
-          lessonId: "${lessonId}"
-          stepId: "${step.id}"
-          answer: "${answer}"
-        ) {
-          ...${AnswerBox.fragment(lokkaClient)},
-          points
+    let updatedStep;
+
+    try {
+      const result = await lokkaClient.mutate(`
+        {
+          updatedStep: submitAnswer(
+            courseId: "${courseId}"
+            lessonId: "${lessonId}"
+            stepId: "${step.id}"
+            answer: "${answer}"
+          ) {
+            ...${AnswerBox.fragment(lokkaClient)},
+            points
+          }
         }
-      }
-    `)
+      `)
+      updatedStep = result.updatedStep
+    } catch(error) {
+      changeProps({ loading: false, error })
+      return
+    }
 
     // Update the cache for the updated state
     Lesson.updateCache({ courseId, lessonId }, (item) => {
