@@ -13,15 +13,20 @@ export default WithActions((env, props, changeProps) => ({
 
     // Do the mutation
     if (!nextStep.visited) {
-      await lokkaClient.mutate(`
-        {
-          markVisited(
-            courseId: "${courseId}"
-            lessonId: "${lessonId}"
-            stepId: "${nextStep.id}"
-          )
-        }
-      `)
+      try {
+        await lokkaClient.mutate(`
+          {
+            markVisited(
+              courseId: "${courseId}"
+              lessonId: "${lessonId}"
+              stepId: "${nextStep.id}"
+            )
+          }
+        `)
+      } catch (error) {
+        changeProps({ loading: false, error })
+        return
+      }
 
       // Update the local cache for the changes in the mutation
       Lesson.updateCache({ courseId, lessonId }, (item) => {

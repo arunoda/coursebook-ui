@@ -5,7 +5,7 @@ export default WithData({
   id: 'Lesson',
   propsToWatch: ['courseId', 'lessonId'],
   cacheOptions: { client: 1000 * 60 * 5 },
-  fetch ({ lokkaClient }, props) {
+  async fetch ({ lokkaClient }, props) {
     const query = `
       {
         course(id: "${props.courseId}") {
@@ -18,6 +18,12 @@ export default WithData({
       }
     `
 
-    return lokkaClient.query(query)
+    try {
+      const result = await lokkaClient.query(query)
+      return result
+    } catch(err) {
+      const error = { message: err.message }
+      return { error }
+    }
   }
 })(Lesson)

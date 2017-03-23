@@ -1,5 +1,6 @@
 import React from 'react'
 import Router from 'next/router'
+import ErrorBox from '~/components/ErrorBox'
 
 const Button = (props) => (
   <button
@@ -93,7 +94,10 @@ class StepNav extends React.Component {
   }
 
   render () {
-    const { steps, currentStepId, loading } = this.props
+    const { steps, currentStepId, loading, error } = this.props
+    if (error) {
+      return (<ErrorBox error={error}/>)
+    }
 
     if (loading) {
       return (<div>Loading...</div>)
@@ -119,10 +123,11 @@ class StepNav extends React.Component {
 }
 
 StepNav.propTypes = {
+  error: React.PropTypes.object,
   steps: React.PropTypes.array,
-  courseId: React.PropTypes.string.isRequired,
-  lessonId: React.PropTypes.string.isRequired,
-  allCourses: React.PropTypes.array.isRequired,
+  courseId: React.PropTypes.string,
+  lessonId: React.PropTypes.string,
+  allCourses: React.PropTypes.array,
   currentStepId: React.PropTypes.string
 }
 

@@ -6,6 +6,7 @@ import getLokkaClient from '~/lib/lokka'
 import getInitialState from '~/lib/state'
 import InitPage from '~/lib/init-page'
 import Layout from '~/components/Layout'
+import { checkAuth } from '~/actions/user'
 
 
 const Content = (props) => (
@@ -42,7 +43,7 @@ const Content = (props) => (
 
 export default InitPage({
   rootContainers: [Header, Navigation, Lesson],
-  getProps: (context) => {
+  getProps: async (context) => {
     const { query } = context
     const initialState = getInitialState(context)
 
@@ -54,9 +55,12 @@ export default InitPage({
     }
   },
   getEnv: (props) => {
+    const store = new Podda(props.initialState)
+    const lokkaClient = getLokkaClient(props.initialState)
+
     return {
-      store: new Podda(props.initialState),
-      lokkaClient: getLokkaClient(props.initialState)
+      store,
+      lokkaClient
     }
   }
 })(Content)

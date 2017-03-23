@@ -1,4 +1,5 @@
 import React from 'react'
+import ErrorBox from '~/components/ErrorBox'
 
 const styles = {
   box: {
@@ -172,7 +173,9 @@ class AnswerBox extends React.Component {
   }
 
   render () {
-    const { step, loading } = this.props
+    const { step, loading, error } = this.props
+
+    if (error) return (<ErrorBox error={error}/>)
 
     if (loading) return (<p>Loading...</p>)
     if (!step.givenAnswer) return this.renderPrompt()
@@ -181,7 +184,8 @@ class AnswerBox extends React.Component {
 }
 
 AnswerBox.propTypes = {
-  step: React.PropTypes.object.isRequired,
+  error: React.PropTypes.object,
+  step: React.PropTypes.object,
   courseId: React.PropTypes.string,
   lessonId: React.PropTypes.string
 }
