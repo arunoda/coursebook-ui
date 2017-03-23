@@ -8,47 +8,74 @@ const styles = {
   }
 }
 
-const Step = (props) => (
-  <div
-    className={props.className}
-    onClick={() => Router.push(props.href, props.as)}
-  >
-    {props.href? (
-      <Link
-        href={props.href}
-        as={props.as}
+class Step extends React.Component {
+  changeRoute() {
+    const { href, as } = this.props
+    if (!href) return
+
+    Router.push(href, as)
+  }
+
+  render () {
+    const { props } = this
+
+    return (
+      <div
+        className={props.className}
+        onClick={() => this.changeRoute()}
       >
-        <a>{props.name}</a>
-      </Link>
-    ) : <a>{props.name}</a>}
+        {props.href? (
+          <Link
+            href={props.href}
+            as={props.as}
+          >
+            <a>{props.name}</a>
+          </Link>
+        ) : <a>{props.name}</a>}
 
-    <style jsx>{`
-      div {
-        display: inline-block;
-        padding: 5px 8px;
-        font-size: 13px;
-        margin-right: 5px;
-        border: 1px solid #DDD;
-        border-radius: 3px;
-        cursor: pointer;
-      }
+        <style jsx>{`
+          div {
+            display: inline-block;
+            padding: 5px 8px;
+            font-size: 13px;
+            margin-right: 5px;
+            border: 1px solid #DDD;
+            border-radius: 3px;
+            cursor: pointer;
+            user-select: none;
+          }
 
-      div:hover {
-        border: 1px solid #8fdcff;
-      }
+          div:hover {
+            border: 1px solid #8fdcff;
+          }
 
-      a {
-        color: #000;
-        text-decoration: none;
-        font-weight: 600;
-      }
+          a {
+            color: #000;
+            text-decoration: none;
+            font-weight: 600;
+          }
 
-      .selected a {
-        color: #E25E5E;
-      }
-    `}</style>
-  </div>
-)
+          .selected a {
+            color: #E25E5E;
+          }
+
+          .disable a {
+            cursor: not-allowed;
+          }
+
+          div.disable {
+            opacity: 0.5;
+            cursor: not-allowed;
+          }
+
+          div.disable:hover {
+            border: 1px solid #DDD;
+          }
+        `}</style>
+      </div>
+    );
+  }
+}
 
 class StepBar extends React.Component {
   renderStep (step, index) {
@@ -59,6 +86,7 @@ class StepBar extends React.Component {
         <Step
           key={index}
           name={step.points}
+          className='disable'
         />
       )
     }
