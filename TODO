@@ -1,6 +1,13 @@
 ## Bugs
 
 * [x] Start Now error when updating the cache. Try by removing user status code.
+* [ ] Add reviews page
+* [x] Add syntax highlighters
+* [ ] Add GA
+* [ ] Enhance a clicks to open in a new browser
+* [ ] Change the loading of the next button
+* [ ] Make inactive step navs unclickable.
+* [ ] Add a footer
 * [ ] If no user, clear the logic cookie
 * [ ] Style StepNav buttons
 * [ ] Style Answer Box.

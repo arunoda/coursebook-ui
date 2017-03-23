@@ -1,4 +1,5 @@
 import marked from 'marked'
+import Highlight from 'react-highlight'
 
 marked.setOptions({
   gfm: true,
@@ -7,11 +8,10 @@ marked.setOptions({
 })
 
 const Markdown = ({ content }) => (
-  <div>
-    <div
-      className='markdown'
-      dangerouslySetInnerHTML={{ __html: marked(content) }}
-    />
+  <div className='markdown'>
+    <Highlight innerHTML={true}>
+      {marked(content)}
+    </Highlight>
     <style jsx global>{`
       .markdown{
         font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
@@ -51,7 +51,7 @@ const Markdown = ({ content }) => (
 
       .markdown code {
         font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
-        font-size: 14px;
+        font-size: 13px;
         background-color: #f9f9f9;
         border-radius: 3px;
         padding: 2px 5px;
