@@ -75,6 +75,7 @@ export default class Header extends React.Component {
     return (
       <div className='header'>
         <A href='/'>Home</A>
+        <A href='/reviews'>Reviews</A>
         <A href={startHref} as={startAs}>Content</A>
         { this.renderLoginLink() }
         { this.renderUserInfo() }

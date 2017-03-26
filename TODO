@@ -1,11 +1,11 @@
 ## Bugs
 
 * [x] Start Now error when updating the cache. Try by removing user status code.
-* [ ] Add reviews page
+* [x] Add the reviews page
 * [x] Add syntax highlighters
 * [ ] Add GA
 * [x] Enhance a clicks to open in a new browser
-* [ ] Change the loading of the next button
+* [x] Change the loading of the next button
 * [x] Make inactive step navs unclickable.
 * [ ] Add a footer
 * [x] If no user, clear the login cookie
