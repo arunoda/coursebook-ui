@@ -3,5 +3,7 @@ module.exports = {
   FIRST_COURSE: 'basics',
   FIRST_LESSON: 'getting-started',
   SITE_NAME: 'Learn Next.js',
-  SITE_TITLE: 'Create SSR Enabled React Apps Easily'
+  SITE_TITLE: 'Create SSR Enabled React Apps Easily',
+
+  GA_TRACKING_ID: 'UA-48364339-12'
 }

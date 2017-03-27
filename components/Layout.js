@@ -18,6 +18,12 @@ Router.onRouteChangeStart = () => {
 Router.onRouteChangeComplete = Router.onRouteChangeError = () => {
   cancelNprogressStart()
   NProgress.done()
+
+  // Send route change to google analytics
+  if (typeof ga !== 'undefined') {
+    ga('set', 'page', location.href);
+    ga('send', 'pageview');
+  }
 }
 
 
