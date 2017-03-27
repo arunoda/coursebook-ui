@@ -5,12 +5,16 @@ import getLokkaClient from '~/lib/lokka'
 import InitPage from '~/lib/init-page'
 import Layout from '~/components/Layout'
 import Link from 'next/link'
+import Head from 'next/head'
 
 const startHref = `/content?course=${FIRST_COURSE}&lesson=${FIRST_LESSON}`
 const startAs = `/${FIRST_COURSE}/${FIRST_LESSON}`
 
 let HomePage = () => (
   <Layout>
+    <Head>
+      <title>{SITE_NAME} - {SITE_TITLE}</title>
+    </Head>
     <Header />
     <div className="content">
       <h2 className="start">START</h2>

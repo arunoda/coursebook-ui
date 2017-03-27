@@ -6,6 +6,7 @@ import Layout from '~/components/Layout'
 import getInitialState from '~/lib/state'
 import getLokkaClient from '~/lib/lokka'
 import InitPage from '~/lib/init-page'
+import Head from 'next/head'
 
 class Reviews extends React.Component {
   constructor(...args) {
@@ -35,6 +36,9 @@ class Reviews extends React.Component {
   render () {
     return (
       <Layout>
+        <Head>
+          <title>Reviews - {SITE_NAME}</title>
+        </Head>
         <Header />
         <div className="reviews-page">
           <h1>Reviews</h1>

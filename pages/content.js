@@ -8,7 +8,6 @@ import InitPage from '~/lib/init-page'
 import Layout from '~/components/Layout'
 import { checkAuth } from '~/actions/user'
 
-
 const Content = (props) => (
   <Layout>
     <Header />

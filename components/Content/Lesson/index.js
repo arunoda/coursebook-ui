@@ -4,6 +4,7 @@ import StepNav from '~/containers/Content/Lesson/StepNav'
 import AnswerBox from '~/containers/Content/Lesson/AnswerBox'
 import ErrorBox from '~/components/ErrorBox'
 import Markdown from './Markdown'
+import Head from 'next/head'
 
 const Lesson = class extends React.Component {
   renderContent (lesson) {
@@ -32,6 +33,9 @@ const Lesson = class extends React.Component {
 
     return (
       <div className='lesson-area'>
+        <Head>
+          <title>{lesson.name} - {SITE_NAME}</title>
+        </Head>
         <h2>{lesson.name}</h2>
         <StepBar steps={lesson.steps || []} courseId={courseId} lessonId={lessonId} currentStepId={stepId} />
         <div className='content'>
