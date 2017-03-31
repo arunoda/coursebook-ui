@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 const A = (props) => (
   <span>
-    <Link href={props.href} as={props.as} onClick={props.onClick}>
+    <Link prefetch href={props.href} as={props.as} onClick={props.onClick}>
       <a style={{ marginRight: 10 }} {...props} />
     </Link>
     <style jsx>{`
