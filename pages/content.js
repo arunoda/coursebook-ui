@@ -1,5 +1,6 @@
 import Podda from 'podda'
 import Header from '~/containers/Header'
+import Footer from '~/components/Footer'
 import Navigation from '~/containers/Content/Navigation'
 import Lesson from '~/containers/Content/Lesson'
 import getLokkaClient from '~/lib/lokka'
@@ -19,6 +20,7 @@ const Content = (props) => (
         <Lesson {...props} />
       </div>
     </div>
+    <Footer />
     <style jsx>{`
       .content {
         margin: 30px 0 0 0;

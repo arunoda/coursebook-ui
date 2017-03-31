@@ -1,5 +1,6 @@
 import Podda from 'podda'
 import Header from '~/containers/Header'
+import Footer from '~/components/Footer'
 import getInitialState from '~/lib/state'
 import getLokkaClient from '~/lib/lokka'
 import InitPage from '~/lib/init-page'
@@ -26,12 +27,14 @@ let HomePage = () => (
         </Link>
       </div>
     </div>
+    <Footer />
     <style jsx>{`
       .content {
           margin: 120px 0 0 0;
           text-align: center;
           -webkit-font-smoothing: subpixel-antialiased;
           font-family: 'Source Sans Pro', sans-serif;
+          min-height: 430px;
       }
 
       .start {

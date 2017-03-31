@@ -2,6 +2,7 @@ import React from 'react'
 import Podda from 'podda'
 import ReactDisqusThread from 'react-disqus-comments'
 import Header from '~/containers/Header'
+import Footer from '~/components/Footer'
 import Layout from '~/components/Layout'
 import getInitialState from '~/lib/state'
 import getLokkaClient from '~/lib/lokka'
@@ -47,9 +48,12 @@ class Reviews extends React.Component {
             { this.getComments() }
           </div>
         </div>
+        <Footer />
         <style jsx>{`
           .reviews-page {
             padding: 0 50px;
+            margin: 0 0 50px 0;
+            min-height: 430px;
           }
 
           h1 {
