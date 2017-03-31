@@ -4,7 +4,7 @@ import WithData from '~/lib/with-data'
 export default WithData({
   id: 'Lesson',
   propsToWatch: ['courseId', 'lessonId'],
-  cacheOptions: { client: 1000 * 60 * 5 },
+  cacheOptions: { client: 1000 * 60 * 60 },
   async fetch ({ lokkaClient }, props) {
     const query = `
       {

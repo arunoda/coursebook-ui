@@ -4,7 +4,7 @@ import WithData from '~/lib/with-data'
 export default WithData({
   id: 'Navigation',
   propsToWatch: [],
-  cacheOptions: { client: 1000 * 60 * 5 },
+  cacheOptions: { client: 1000 * 60 * 60 },
   fetch ({ lokkaClient }, props) {
     const query = `
       {

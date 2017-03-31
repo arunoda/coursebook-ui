@@ -9,7 +9,7 @@ let HeaderComponent
 HeaderComponent = WithData({
   id: 'Header',
   propsToWatch: [],
-  cacheOptions: { client: 1000 * 60 * 5 },
+  cacheOptions: { client: 1000 * 60 * 60 },
   fetch ({ lokkaClient }, props) {
     const query = `
       {
