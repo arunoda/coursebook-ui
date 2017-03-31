@@ -1,11 +1,11 @@
 export default () => (
   <div>
     <p>
-      Sponsored by <a href="https://zeit.co" target="_blank">▲Zeit</a>.
+      Another project from <a href="https://zeit.co" target="_blank">▲Zeit</a>.
       Curated by <a href="https://twitter.com/arunoda" target="_blank">@arunoda</a>.
     </p>
     <p>
-      Visit <a href="https://github.com/arunoda/learnnextjs-content" target="_blank">here</a> to submit changes to lessons.
+      Visit <a href="https://github.com/arunoda/learnnextjs-content" target="_blank">here</a> to edit content.
     </p>
     <style jsx>{`
       div {
