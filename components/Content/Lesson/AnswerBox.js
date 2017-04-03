@@ -36,7 +36,7 @@ class Answer extends React.Component {
     const { answer, onChange, symbol } = this.props
 
     return (
-      <div>
+      <label>
         {symbol? symbol : (
           <input
             type='radio'
@@ -47,7 +47,8 @@ class Answer extends React.Component {
         )}
         <span>{answer}</span>
         <style jsx>{`
-          div {
+          label {
+            display: block;
             font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
             font-size: 15px;
             margin: 0 0 5px 0;
@@ -67,7 +68,7 @@ class Answer extends React.Component {
             display: inline-block;
           }
         `}</style>
-      </div>
+      </label>
     )
   }
 }
