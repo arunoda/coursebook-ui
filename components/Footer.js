@@ -1,7 +1,7 @@
 export default () => (
   <div>
     <p>
-      Another project from <a href="https://zeit.co" target="_blank">▲Zeit</a>.
+      Brought to you by <a href="https://zeit.co" target="_blank">▲Zeit</a>.
       Curated by <a href="https://twitter.com/arunoda" target="_blank">@arunoda</a>.
     </p>
     <p>
