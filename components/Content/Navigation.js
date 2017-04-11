@@ -25,7 +25,7 @@ class Navigation extends React.Component {
         </Link>
         <style jsx>{`
           div {
-            margin: 0 0 8px 0;
+            margin: 0 10px 8px 0;
           }
 
           a {
