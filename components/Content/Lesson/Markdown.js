@@ -15,7 +15,9 @@ export default class Markdown extends React.Component {
     const links = dom.getElementsByTagName('a')
     Object.keys(links).forEach((id) => {
       const link = links[id]
-      link.setAttribute('target', '_blank')
+      if (link.setAttribute) {
+        link.setAttribute('target', '_blank')
+      }
     })
   }
 
