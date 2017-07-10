@@ -5,6 +5,7 @@ import AnswerBox from '~/containers/Content/Lesson/AnswerBox'
 import ErrorBox from '~/components/ErrorBox'
 import Markdown from './Markdown'
 import Head from 'next/head'
+import PropTypes from 'prop-types'
 
 const Lesson = class extends React.Component {
   renderContent (lesson) {
@@ -66,12 +67,12 @@ const Lesson = class extends React.Component {
 }
 
 Lesson.propTypes = {
-  error: React.PropTypes.object,
-  courseId: React.PropTypes.string,
-  lessonId: React.PropTypes.string,
-  stepId: React.PropTypes.string,
-  course: React.PropTypes.object,
-  allCourses: React.PropTypes.array
+  error: PropTypes.object,
+  courseId: PropTypes.string,
+  lessonId: PropTypes.string,
+  stepId: PropTypes.string,
+  course: PropTypes.object,
+  allCourses: PropTypes.array
 }
 
 Lesson.allCoursesFragment = (c) => c.createFragment(`

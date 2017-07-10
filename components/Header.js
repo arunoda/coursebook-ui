@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import PropTypes from 'prop-types'
 
 const A = (props) => (
   <span>
@@ -92,9 +93,9 @@ export default class Header extends React.Component {
 }
 
 Header.propTypes = {
-  user: React.PropTypes.object,
-  onLogout: React.PropTypes.func,
-  onLogin: React.PropTypes.func
+  user: PropTypes.object,
+  onLogout: PropTypes.func,
+  onLogin: PropTypes.func
 }
 
 Header.userFragment = (c) => c.createFragment(`

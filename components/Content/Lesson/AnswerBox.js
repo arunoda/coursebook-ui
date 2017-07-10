@@ -1,5 +1,6 @@
 import React from 'react'
 import ErrorBox from '~/components/ErrorBox'
+import PropTypes from 'prop-types'
 
 const styles = {
   box: {
@@ -185,10 +186,10 @@ class AnswerBox extends React.Component {
 }
 
 AnswerBox.propTypes = {
-  error: React.PropTypes.object,
-  step: React.PropTypes.object,
-  courseId: React.PropTypes.string,
-  lessonId: React.PropTypes.string
+  error: PropTypes.object,
+  step: PropTypes.object,
+  courseId: PropTypes.string,
+  lessonId: PropTypes.string
 }
 
 AnswerBox.fragment = (c) => c.createFragment(`

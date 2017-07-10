@@ -36,6 +36,7 @@
     "next": "beta",
     "nprogress": "^0.2.0",
     "podda": "^1.2.2",
+    "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-disqus-comments": "^0.5.2",
     "react-dom": "^15.5.4",

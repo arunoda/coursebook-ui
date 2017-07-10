@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import Router from 'next/router'
+import PropTypes from 'prop-types'
 
 const styles = {
   bold: {
@@ -120,10 +121,10 @@ class StepBar extends React.Component {
 }
 
 StepBar.propTypes = {
-  steps: React.PropTypes.array,
-  courseId: React.PropTypes.string,
-  lessonId: React.PropTypes.string,
-  currentStepId: React.PropTypes.string
+  steps: PropTypes.array,
+  courseId: PropTypes.string,
+  lessonId: PropTypes.string,
+  currentStepId: PropTypes.string
 }
 
 StepBar.fragment = (c) => c.createFragment(`

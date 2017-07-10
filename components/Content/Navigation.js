@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import PropTypes from 'prop-types'
 
 const styles = {
   bold: {
@@ -88,9 +89,9 @@ class Navigation extends React.Component {
 }
 
 Navigation.propTypes = {
-  courses: React.PropTypes.array.isRequired,
-  courseId: React.PropTypes.string.isRequired,
-  lessonId: React.PropTypes.string.isRequired
+  courses: PropTypes.array.isRequired,
+  courseId: PropTypes.string.isRequired,
+  lessonId: PropTypes.string.isRequired
 }
 
 Navigation.courseFragment = (c) => c.createFragment(`

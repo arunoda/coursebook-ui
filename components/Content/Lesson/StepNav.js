@@ -1,6 +1,7 @@
 import React from 'react'
 import Router from 'next/router'
 import ErrorBox from '~/components/ErrorBox'
+import PropTypes from 'prop-types'
 
 const Button = (props) => (
   <button
@@ -123,12 +124,12 @@ class StepNav extends React.Component {
 }
 
 StepNav.propTypes = {
-  error: React.PropTypes.object,
-  steps: React.PropTypes.array,
-  courseId: React.PropTypes.string,
-  lessonId: React.PropTypes.string,
-  allCourses: React.PropTypes.array,
-  currentStepId: React.PropTypes.string
+  error: PropTypes.object,
+  steps: PropTypes.array,
+  courseId: PropTypes.string,
+  lessonId: PropTypes.string,
+  allCourses: PropTypes.array,
+  currentStepId: PropTypes.string
 }
 
 StepNav.courseFragment = (c) => c.createFragment(`
