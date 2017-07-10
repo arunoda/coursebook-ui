@@ -1,0 +1,8 @@
+{
+  "name": "learn-next-js",
+  "env": {
+    "NODE_ENV": "production",
+    "BACKEND_URL": "https://server.learnnextjs.com"
+  },
+  "alias": "learnnextjs.com"
+}
