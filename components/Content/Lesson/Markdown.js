@@ -1,7 +1,17 @@
 import React from 'react'
 import ReactDom from 'react-dom'
 import marked from 'marked'
-import Highlight from 'react-highlight'
+import dynamic from 'next/dynamic'
+
+const Highlight = dynamic(import('react-highlight'), {
+  // Here we don't show any loading component.
+  // But instead, we'll show the markdown content without syntax-highlight
+  loading: ({ children }) => (
+    <div
+      dangerouslySetInnerHTML={{__html: children}}
+    />
+  )
+})
 
 marked.setOptions({
   gfm: true,
@@ -29,13 +39,30 @@ export default class Markdown extends React.Component {
     this.makeLinksOpenInANewTab()
   }
 
-  render () {
+  renderMarkdown () {
     const { content } = this.props
-    return (
-      <div className='markdown'>
+
+    // Only use the syntax-highlight component only if there's a code block
+    // That's because it's too heavy.
+    if (/~~~/.test(content)) {
+      return (
         <Highlight innerHTML={true}>
           {marked(content)}
         </Highlight>
+      )
+    }
+
+    return (
+      <div
+        dangerouslySetInnerHTML={{__html: marked(content)}}
+      />
+    )
+  }
+
+  render () {
+    return (
+      <div className='markdown'>
+        { this.renderMarkdown() }
         <style jsx global>{`
           .markdown{
             font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
