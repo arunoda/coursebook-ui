@@ -49,7 +49,15 @@ app.prepare()
     server.use((req, res) => {
       handler(req, res)
     })
-    server.listen(port)
+
+    server.listen(port, (err) => {
+      if (err) {
+        console.error(err.stack)
+        process.exit(1)
+      }
+
+      console.log(`App started on port: http://localhost:${port}`)
+    })
   })
   .catch((ex) => {
     console.error(ex.stack)
